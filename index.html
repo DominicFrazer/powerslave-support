@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PowerSlave Developmentss — Support</title>
+  <meta name="description" content="Support and help for apps by PowerSlave Developmentss, including TVApp.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="brand"><span class="dot"></span> PowerSlave Developments</div>
+      <h1>Support</h1>
+      <p class="lede">Help, answers, and contact details for our apps. Pick a topic below or get in touch.</p>
+      <nav>
+        <a href="#apps">Apps</a>
+        <a href="#faq">FAQ</a>
+        <a href="#support">Contact</a>
+        <a href="#about">About</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <section id="apps">
+      <h2>Apps</h2>
+      <div class="apps">
+
+        <div class="app upcoming">
+          <div class="icon soon">🌶️</div>
+          <div>
+            <h3>Paprika</h3>
+            <!-- TODO: one-line description once Paprika is announced -->
+            <p>A new app from PowerSlave Developments — details coming soon.</p>
+            <div class="meta">
+              <span class="soon-badge">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="app">
+          <img class="icon" src="icons/tvapp.png" alt="TVApp icon" width="64" height="64">
+          <div>
+            <h3>TVApp</h3>
+            <p>A fast, native media player for your Jellyfin server — browse your library and play almost any format, powered by VLC.</p>
+            <div class="platforms">
+              <span>Apple TV</span>
+              <span>iPhone</span>
+              <span>iPad</span>
+              <span>Mac</span>
+            </div>
+            <div class="meta">
+              <span class="year">Launched 2026</span>
+              <a class="store" href="https://apps.apple.com/app/id6788813078" target="_blank" rel="noopener">View on the App Store →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="app">
+          <img class="icon" src="icons/contagion.png" alt="Contagion icon" width="64" height="64">
+          <div>
+            <h3>Contagion</h3>
+            <p>A roguelike raid game with permadeath — push deeper through brutal levels where a single mistake ends the run.</p>
+            <div class="platforms">
+              <span>iPhone</span>
+              <span>iPad</span>
+            </div>
+            <div class="meta">
+              <span class="year">Launched 2019</span>
+              <a class="store" href="https://apps.apple.com/app/id1456397818" target="_blank" rel="noopener">View on the App Store →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="app">
+          <img class="icon" src="icons/jetpack.png" alt="JetPack icon" width="64" height="64">
+          <div>
+            <h3>JetPack</h3>
+            <p>A fast 2D action shooter — pilot a jetpack craft through waves of 18 enemy types, grabbing power-ups and pickups as the difficulty climbs.</p>
+            <div class="platforms">
+              <span>iPhone</span>
+              <span>iPad</span>
+            </div>
+            <div class="meta">
+              <span class="year">Launched 2019</span>
+              <a class="store" href="https://apps.apple.com/app/id1472551316" target="_blank" rel="noopener">View on the App Store →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="app">
+          <img class="icon" src="icons/treewise.png" alt="TreeWise icon" width="64" height="64">
+          <div>
+            <h3>TreeWise <span style="color:var(--muted);font-weight:400;font-size:15px">— GetWise with Trees</span></h3>
+            <p>A pocket field guide to the trees around you. Identify 55 species by their leaves, bark, and seeds, see when each one flowers and fruits, and log your own sightings with photos as you go.</p>
+            <div class="platforms">
+              <span>iPhone</span>
+              <span>iPad</span>
+            </div>
+            <div class="meta">
+              <span class="year">Launched 2010</span>
+              <a class="store" href="https://apps.apple.com/app/id391327208" target="_blank" rel="noopener">View on the App Store →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more apps here as you ship them -->
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details>
+        <summary>What is TVApp?</summary>
+        <p>TVApp is a native client for <a href="https://jellyfin.org" target="_blank" rel="noopener">Jellyfin</a>, the free media server. It lets you browse and stream your own movies, shows, and other media from your Jellyfin server on Apple TV, iPhone, iPad, and Mac.</p>
+      </details>
+
+      <details>
+        <summary>How do I connect TVApp to my server?</summary>
+        <p>On first launch, enter your Jellyfin server's address (for example <code>http://192.168.1.10:8096</code> or your public URL) and sign in with your Jellyfin username and password. TVApp connects directly to that server — nothing goes through us.</p>
+      </details>
+
+      <details>
+        <summary>A video won't play in TVApp or looks wrong. What can I do?</summary>
+        <p>TVApp uses VLC for playback, which handles most formats and codecs directly. If something won't play, first confirm it plays in another Jellyfin client, check that your device and server are on a reachable network, and make sure your server has enough bandwidth for the file. Restarting the app clears most transient playback issues.</p>
+      </details>
+
+      <details>
+        <summary>Does TVApp resume where I left off?</summary>
+        <p>Yes. Playback position is saved back to your Jellyfin server, so you can pick up where you stopped — including across different devices signed in to the same server.</p>
+      </details>
+
+      <details>
+        <summary>Do you collect any of my data?</summary>
+        <p>No. TVApp does not collect, store, or transmit any personal data to us. It talks only to the Jellyfin server you configure. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+      </details>
+
+      <details>
+        <summary>My question isn't here.</summary>
+        <p>Email us and we'll help — see the contact section below.</p>
+      </details>
+    </section>
+
+    <section id="support">
+      <h2>Contact</h2>
+      <div class="support">
+        <div>Need a hand? Email us and we'll get back to you.</div>
+        <!-- TODO: replace with your real support inbox -->
+        <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>Where the name came from</h2>
+      <div class="support" style="text-align:left">
+        <p style="margin-top:0">Long before the apps, there was <strong>Combat Crazy</strong> — a game written for the Commodore 64. A few of its demos still live on YouTube, and that C64 lineage is where the <em>PowerSlave</em> name traces back.</p>
+        <p style="margin-bottom:0">Watch the Combat Crazy demos:
+          <a href="https://www.youtube.com/watch?v=ce6ANjWF1nE" target="_blank" rel="noopener">demo 1</a> ·
+          <a href="https://www.youtube.com/watch?v=E3HL4iPAf2s" target="_blank" rel="noopener">demo 2</a> ·
+          <a href="https://www.youtube.com/watch?v=s_soZU0UNAo" target="_blank" rel="noopener">demo 3</a> ·
+          <a href="https://www.youtube.com/watch?v=_1KWykqLNWE" target="_blank" rel="noopener">demo 4</a> ·
+          <a href="https://www.youtube.com/watch?v=w12udVxGQa0" target="_blank" rel="noopener">demo 5</a> ·
+          <a href="https://www.youtube.com/watch?v=Fbzo-hl9nKQ" target="_blank" rel="noopener">demo 6</a> ·
+          <a href="https://www.youtube.com/watch?v=QJwg2qBMHA0" target="_blank" rel="noopener">demo 7</a> ·
+          <a href="https://www.youtube.com/watch?v=wWYcyHh05wU" target="_blank" rel="noopener">demo 8</a> ·
+          <a href="https://www.youtube.com/watch?v=qme4a_a-3Ck" target="_blank" rel="noopener">demo 9</a> ·
+          <a href="https://www.youtube.com/watch?v=Oc509pO-zws" target="_blank" rel="noopener">demo 10</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
+      <div style="margin-top:6px"><a href="privacy.html">Privacy Policy</a></div>
+    </footer>
+
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
