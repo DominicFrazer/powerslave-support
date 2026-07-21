@@ -16,6 +16,7 @@
       <p class="lede">Help, answers, and contact details for our apps. Pick a topic below or get in touch.</p>
       <nav>
         <a href="#apps">Apps</a>
+        <a href="#beta">Android beta</a>
         <a href="#faq">FAQ</a>
         <a href="#support">Contact</a>
         <a href="#about">About</a>
@@ -49,10 +50,12 @@
               <span>iPhone</span>
               <span>iPad</span>
               <span>Mac</span>
+              <span>Android (beta)</span>
             </div>
             <div class="meta">
               <span class="year">Launched 2026</span>
               <a class="store" href="https://apps.apple.com/app/id6788813078" target="_blank" rel="noopener">View on the App Store →</a>
+              <a class="store" href="#beta">Get the Android beta →</a>
             </div>
           </div>
         </div>
@@ -109,6 +112,29 @@
       </div>
     </section>
 
+    <section id="beta">
+      <h2>TVApp for Android — beta test</h2>
+      <p class="beta-lede">TVApp is now in testing on Android (phones, tablets, Android TV, Chromebooks, and Android XR). Join the tester group to get early builds through Google Play and help shape the release.</p>
+      <p class="beta-lede">You'll need your own <a href="https://jellyfin.org" target="_blank" rel="noopener">Jellyfin</a> server to sign in to and stream from — TVApp is a client for it.</p>
+      <ol class="steps">
+        <li>
+          <strong>Join the tester group.</strong>
+          Sign in to Google with the same account you use on the Play Store, then join our group:
+          <a href="https://groups.google.com/g/powerslave_tvapp" target="_blank" rel="noopener">groups.google.com/g/powerslave_tvapp</a>.
+        </li>
+        <li>
+          <strong>Accept the invitation.</strong>
+          On your Android device, open the opt-in link and tap <em>Become a tester</em>:
+          <a href="https://play.google.com/apps/internaltest/4701221263049314578" target="_blank" rel="noopener">play.google.com/apps/internaltest/4701221263049314578</a>.
+        </li>
+        <li>
+          <strong>Install from Google Play.</strong>
+          Follow the “Download it on Google Play” link on that page. TVApp installs and updates like any other app, and you’ll get new test builds automatically.
+        </li>
+      </ol>
+      <p class="beta-note">Being a tester is free and you can leave any time from the opt-in page. Found a bug or have feedback? <a href="#support">Email us</a> — it’s the fastest way to reach the developer.</p>
+    </section>
+
     <section id="faq" class="faq">
       <h2>Frequently asked questions</h2>
 
@@ -125,6 +151,11 @@
       <details>
         <summary>A video won't play in TVApp or looks wrong. What can I do?</summary>
         <p>TVApp uses VLC for playback, which handles most formats and codecs directly. If something won't play, first confirm it plays in another Jellyfin client, check that your device and server are on a reachable network, and make sure your server has enough bandwidth for the file. Restarting the app clears most transient playback issues.</p>
+      </details>
+
+      <details>
+        <summary>Is TVApp available on Android?</summary>
+        <p>TVApp is currently in beta testing on Android — phones, tablets, Android TV, Chromebooks, and Android XR. See the <a href="#beta">Android beta</a> section above to join the tester group and install it through Google Play.</p>
       </details>
 
       <details>
