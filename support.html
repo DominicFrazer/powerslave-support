@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Support — PowerSlave Developments</title>
+  <meta name="description" content="Help, FAQs, Android beta instructions, and contact details for apps by PowerSlave Developments, including TVApp and Map Wanderer.">
+  <link rel="canonical" href="https://powerslave.dev/support.html">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/tvapp.png">
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PowerSlave Developments">
+  <meta property="og:title" content="Support — PowerSlave Developments">
+  <meta property="og:description" content="Help, FAQs, Android beta instructions, and contact details for our apps.">
+  <meta property="og:url" content="https://powerslave.dev/support.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="dot"></span> PowerSlave Developments</a>
+      <nav class="topnav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="index.html#apps">Apps</a>
+        <a href="work.html">Work</a>
+        <a href="support.html" aria-current="page">Support</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">Help &amp; contact</p>
+      <h1>Support</h1>
+      <p class="lede">Answers to common questions, Android beta instructions, and a direct line to the developer.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#support">Email support</a>
+        <a class="btn" href="#beta">Android beta</a>
+        <a class="btn" href="#faq">FAQ</a>
+      </div>
+    </header>
+
+    <section id="beta" aria-labelledby="beta-h">
+      <div class="section-head">
+        <h2 id="beta-h">TVApp for Android — beta test</h2>
+      </div>
+      <p class="lede-sm">TVApp is in testing on Android — phones, tablets, Android&nbsp;TV, Chromebooks, and Android&nbsp;XR. Join the tester group to get early builds through Google&nbsp;Play and help shape the release.</p>
+      <p class="lede-sm">You'll need your own <a href="https://jellyfin.org" target="_blank" rel="noopener">Jellyfin</a> server to sign in to and stream from — TVApp is a client for it.</p>
+
+      <ol class="steps">
+        <li>
+          <strong>Join the tester group.</strong>
+          Sign in to Google with the same account you use on the Play&nbsp;Store, then join our group:
+          <a href="https://groups.google.com/g/powerslave_tvapp" target="_blank" rel="noopener">groups.google.com/g/powerslave_tvapp</a>.
+        </li>
+        <li>
+          <strong>Become a tester.</strong>
+          On the same Google account, open the opt-in page and tap <em>Become a tester</em>:
+          <a href="https://play.google.com/apps/testing/com.powerslave.tvapp" target="_blank" rel="noopener">play.google.com/apps/testing/com.powerslave.tvapp</a>. Without this step Google&nbsp;Play won't let you install the app, even though it may still show it to you.
+        </li>
+        <li>
+          <strong>Wait a little, then install from Google Play.</strong>
+          Google can take <strong>15–60 minutes</strong> to register you as a tester. Then open TVApp on Google&nbsp;Play and install it:
+          <a href="https://play.google.com/store/apps/details?id=com.powerslave.tvapp" target="_blank" rel="noopener">play.google.com/store/apps/details?id=com.powerslave.tvapp</a>. It installs and updates like any other app, and you'll get new test builds automatically.
+        </li>
+      </ol>
+
+      <p class="note" style="margin-top:20px"><strong>Seeing an install error?</strong> That almost always means Google hasn't finished registering you as a tester yet — it's not a problem with your device or the app. Give it up to an hour, then try again from the opt-in page above. Still stuck? Check the Play&nbsp;Store is signed in to the same Google account you joined the group with (tap your avatar, top right), and try clearing the Play&nbsp;Store's cache (Settings → Apps → Google Play Store → Storage → Clear cache).</p>
+      <p class="note">Being a tester is free and you can leave the group any time. Found a bug or have feedback? <a href="#support">Email us</a> — it's the fastest way to reach the developer.</p>
+    </section>
+
+    <section id="faq" class="faq" aria-labelledby="faq-h">
+      <div class="section-head">
+        <h2 id="faq-h">Frequently asked questions</h2>
+        <span class="note">TVApp</span>
+      </div>
+
+      <details>
+        <summary>What is TVApp?</summary>
+        <p>TVApp is a native client for <a href="https://jellyfin.org" target="_blank" rel="noopener">Jellyfin</a>, the free media server. It lets you browse and stream your own movies, shows, and other media from your Jellyfin server on Apple&nbsp;TV, iPhone, iPad, and Mac.</p>
+      </details>
+
+      <details>
+        <summary>How do I connect TVApp to my server?</summary>
+        <p>On first launch, enter your Jellyfin server's address (for example <code>http://192.168.1.10:8096</code> or your public URL) and sign in with your Jellyfin username and password. TVApp connects directly to that server — nothing goes through us.</p>
+      </details>
+
+      <details>
+        <summary>A video won't play in TVApp or looks wrong. What can I do?</summary>
+        <p>TVApp uses VLC for playback, which handles most formats and codecs directly. If something won't play, first confirm it plays in another Jellyfin client, check that your device and server are on a reachable network, and make sure your server has enough bandwidth for the file. Restarting the app clears most transient playback issues.</p>
+      </details>
+
+      <details>
+        <summary>Is TVApp available on Android?</summary>
+        <p>TVApp is currently in beta testing on Android — phones, tablets, Android&nbsp;TV, Chromebooks, and Android&nbsp;XR. See the <a href="#beta">Android beta</a> section above to join the tester group and install it through Google&nbsp;Play.</p>
+      </details>
+
+      <details>
+        <summary>Does TVApp resume where I left off?</summary>
+        <p>Yes. Playback position is saved back to your Jellyfin server, so you can pick up where you stopped — including across different devices signed in to the same server.</p>
+      </details>
+
+      <details>
+        <summary>Do you collect any of my data?</summary>
+        <p>No. TVApp does not collect, store, or transmit any personal data to us. It talks only to the Jellyfin server you configure. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+      </details>
+
+      <details>
+        <summary>My question isn't here.</summary>
+        <p>Email us and we'll help — see the contact section below.</p>
+      </details>
+    </section>
+
+    <section id="support" aria-labelledby="support-h">
+      <div class="section-head">
+        <h2 id="support-h">Contact</h2>
+      </div>
+      <div class="panel center">
+        <p>Need a hand? Email us and we'll get back to you.</p>
+        <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="work.html">Client work</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:support@powerslave.dev">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
