@@ -407,6 +407,30 @@ h2 {
   color: var(--accent-2);
 }
 
+/* Services ------------------------------------------------------- */
+
+.services {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  margin-bottom: 20px;
+}
+
+.service { padding: 17px 19px; }
+
+.service h3 {
+  margin: 0 0 5px;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.service p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 /* Client work ---------------------------------------------------- */
 
 .work-group { margin-bottom: 34px; }
