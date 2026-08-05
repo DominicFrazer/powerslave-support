@@ -5,18 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy — PowerSlave Developments</title>
   <meta name="description" content="Privacy policy for apps by PowerSlave Developments, including TVApp.">
+  <link rel="canonical" href="https://powerslave.dev/privacy.html">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/tvapp.png">
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
+  <a class="skip" href="#main">Skip to content</a>
 
-    <header>
-      <div class="brand"><span class="dot"></span> PowerSlave Developments</div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="dot"></span> PowerSlave Developments</a>
+      <nav class="topnav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="index.html#apps">Apps</a>
+        <a href="work.html">Work</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" class="wrap prose">
+
+    <header class="hero">
+      <p class="eyebrow">Legal</p>
       <h1>Privacy Policy</h1>
       <p class="lede">Last updated: 8 July 2026</p>
-      <nav>
-        <a href="index.html">← Back to Support</a>
-      </nav>
+      <div class="hero-cta">
+        <a class="btn" href="privacy-wanderer.html">Map Wanderer policy</a>
+      </div>
     </header>
 
     <section>
@@ -55,12 +77,20 @@
       <p>Questions about privacy? Email <a href="mailto:support@powerslave.dev">support@powerslave.dev</a>.</p>
     </section>
 
-    <footer>
-      <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
-      <div style="margin-top:6px"><a href="index.html">Support</a></div>
-    </footer>
+  </main>
 
-  </div>
+  <footer>
+    <div class="wrap">
+      <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="work.html">Client work</a>
+        <a href="support.html">Support</a>
+        <a href="privacy-wanderer.html">Map Wanderer privacy</a>
+      </div>
+    </div>
+  </footer>
+
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
