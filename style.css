@@ -431,6 +431,102 @@ h2 {
   font-size: 14px;
 }
 
+/* Proof statement ------------------------------------------------ */
+
+.proof {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.proof-figure {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 128px;
+}
+.proof-figure b {
+  display: block;
+  font-size: clamp(46px, 8vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.proof-figure span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proof h3 { margin: 0 0 6px; font-size: clamp(18px, 2.6vw, 22px); letter-spacing: -0.015em; }
+.proof p { margin: 0; color: var(--muted); }
+.proof p + p { margin-top: 10px; }
+
+@media (forced-colors: active) {
+  .proof-figure b { -webkit-text-fill-color: CanvasText; color: CanvasText; }
+}
+@media (max-width: 600px) {
+  .proof { flex-direction: column; gap: 14px; text-align: center; }
+  .proof-figure { min-width: 0; }
+}
+
+/* People --------------------------------------------------------- */
+
+.people {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.person { padding: 22px; }
+.person h3 { margin: 0 0 2px; font-size: 19px; letter-spacing: -0.015em; }
+.person .role {
+  display: block;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.person .where {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.person p { margin: 12px 0 0; color: var(--muted); font-size: 14.5px; }
+.person ul { margin: 12px 0 0; padding-left: 20px; }
+.person li { color: var(--muted); font-size: 14px; margin-bottom: 6px; }
+.person li strong { color: var(--text); font-weight: 600; }
+
+/* Audience segments ---------------------------------------------- */
+
+.segments { margin: 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+.segments li {
+  padding-left: 18px;
+  position: relative;
+  color: var(--muted);
+  font-size: 15px;
+}
+.segments li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.segments li strong { color: var(--text); }
+
 /* Client work ---------------------------------------------------- */
 
 .work-group { margin-bottom: 34px; }
@@ -617,6 +713,47 @@ footer .links {
   gap: 6px 14px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* Print ---------------------------------------------------------- */
+
+@page {
+  size: A4;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  /* Chrome's PDF export paints the gradient's bounding box when
+     background-clip: text is used, leaving a visible rectangle around the
+     headline. Fall back to solid ink. */
+  .hero h1,
+  .proof-figure b {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--text);
+  }
+  .proof-figure b { color: var(--accent); }
+
+  /* The glow is a large flat wash on paper — drop it. */
+  body { background: none; }
+
+  .skip { display: none; }
+
+  /* Sticky positioning has no meaning in print and can clip content. */
+  .topbar { position: static; backdrop-filter: none; }
+
+  /* Don't split a card, step or FAQ entry across a page boundary. */
+  .card,
+  .panel,
+  .steps li,
+  .faq details,
+  .proof { break-inside: avoid; page-break-inside: avoid; }
+
+  section { break-inside: auto; padding: 18px 0; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+
+  /* Deliberately NOT expanding href values after links. On the support page the
+     link text is already the URL, so it prints the address twice. */
 }
 
 /* Motion --------------------------------------------------------- */
