@@ -54,7 +54,7 @@
     <header class="hero">
       <p class="eyebrow">Independent app studio</p>
       <h1>We publish our own apps — and help build yours.</h1>
-      <p class="lede">PowerSlave Developments ships native apps for iPhone, iPad, Mac, Apple&nbsp;TV and Android, and has architected and led mobile products for broadcasters, banks, travel companies and retailers. Our oldest app has been in the Apple App&nbsp;Store for <span data-years-since="2010-12-01">15</span>&nbsp;years.</p>
+      <p class="lede">PowerSlave Developments ships native apps for iPhone, iPad, Mac, Apple&nbsp;TV and Android, and has architected and led mobile products for broadcasters, banks, travel companies and retailers. Our oldest app has been in the Apple App&nbsp;Store for <span data-years-since="2010-09-17">15</span>&nbsp;years.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#apps">Browse our apps</a>
         <a class="btn" href="work.html">Client work</a>
@@ -276,8 +276,8 @@
 
     /* Keep "in the App Store for N years" accurate without anyone editing it.
        Counts COMPLETED years since the date in data-years-since, so it never
-       overstates before the anniversary. TreeWise v1.0 went live in 2010; set the
-       exact date here from App Store Connect and the copy maintains itself. */
+       overstates before the anniversary. TreeWise v1.0 went Ready for Sale on
+       17 September 2010, confirmed in App Store Connect. */
     document.querySelectorAll('[data-years-since]').forEach(function (el) {
       var since = new Date(el.getAttribute('data-years-since') + 'T00:00:00');
       if (isNaN(since)) { return; }
