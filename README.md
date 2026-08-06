@@ -43,21 +43,26 @@ GitHub provisions HTTPS automatically.
 ## The "N years in the App Store" line
 
 The hero on `index.html` claims our oldest app has been on the App Store for N years. **Don't hardcode
-the number.** It lives in `data-years-since="2010-12-01"` on a `<span>`, and a script counts *completed*
-years, so the figure can never overstate before the anniversary. Replace that date with TreeWise's exact
-v1.0 release date from App Store Connect and the copy maintains itself forever.
+the number.** It lives in `data-years-since="2010-09-17"` on a `<span>`, and a script counts *completed*
+years, so the figure can never overstate before the anniversary.
+
+That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect — 17 September 2010,
+10:22 PM. It ticks over to 16 on 17 September 2026 with no edit needed.
 
 ## Known follow-ups
 
-- **Confirm TreeWise's exact v1.0 date.** `2010-12-01` is a deliberately conservative placeholder chosen
-  so the hero renders "15 years", matching what App Store Connect reports. The real date makes it exact.
 - **Two dates in the source CV are impossible** and were reduced to years on `work.html` rather than
   guessed at: Zalando reads "Oct 2020 – Mar 2020" (published as 2019–2020), and Tignum reads
   "Jul 2019 – Sep 2020" for a stated 3-month contract (published as 2019). Correct at source if it matters.
 - **Client names on `work.html` are published as-is from the CV.** Several were agency engagements
   (Candyspace/ITV, Cognizant) that can carry no-publicity clauses. Worth a check. The SapientNitro
   attribution on the Lloyds entry has already been removed.
+- **`JetPack Space Arcade` has supplied no privacy details to Apple.** The listing reads "the developer
+  has not provided details about its privacy practices", and Apple will require them on the next update.
+  The answer is Data Not Collected across every category, matching the other three apps.
+- **App names on the site don't match the App Store titles.** `Contagion` is listed as *The Brigands of
+  Venatus*; `JetPack` and `TreeWise` are prefixes of *JetPack Space Arcade* and *TreeWise: Tree Field
+  Guide*. Keeping the site's names is a deliberate decision — but a user arriving from the Brigands
+  listing won't see it named in the privacy policy.
 - `og:image` is not set on any page, so links unfurl without a preview image. Needs a 1200×630 PNG.
 - `index.html` still has a `TODO` for the Paprika description.
-- `privacy.html` is linked as the general policy but its body text is written specifically about TVApp.
-  Worth broadening the wording to cover Contagion, JetPack and TreeWise explicitly.
