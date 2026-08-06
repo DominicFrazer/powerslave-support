@@ -4,19 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Legacy anchors: #beta / #faq / #support used to live on this page.
-       Keep old inbound links working by forwarding them to support.html. -->
+  <!-- Sections that used to live on this page have moved to their own pages.
+       Keep old inbound links working by forwarding the hashes. -->
   <script>
     (function () {
-      var moved = { '#beta': 1, '#faq': 1, '#support': 1 };
-      if (moved[window.location.hash]) {
-        window.location.replace('support.html' + window.location.hash);
-      }
+      var moved = {
+        '#beta':    'support.html#beta',
+        '#faq':     'support.html#faq',
+        '#support': 'support.html#support',
+        '#apps':    'apps.html#apps',
+        '#about':   'team.html',
+        '#work':    'services.html'
+      };
+      var target = moved[window.location.hash];
+      if (target) { window.location.replace(target); }
     })();
   </script>
 
-  <title>PowerSlave Developments — native apps for iOS, macOS, tvOS and Android</title>
-  <meta name="description" content="PowerSlave Developments is a small independent studio making native apps for iPhone, iPad, Mac, Apple TV and Android — outdoor maps, a Jellyfin media player, a tree field guide, and games.">
+  <title>PowerSlave Developments — senior engineering consultancy</title>
+  <meta name="description" content="A senior engineering consultancy. Two consultant engineer managers, pulled along by modern AI tooling, ship at the speed of a large team — and rescue the projects that have stalled. Native mobile, AI systems, robotics and IoT, regulated FinTech and media streaming.">
   <link rel="canonical" href="https://powerslave.dev/">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -26,8 +32,8 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PowerSlave Developments">
-  <meta property="og:title" content="PowerSlave Developments">
-  <meta property="og:description" content="A small independent studio making native apps for iPhone, iPad, Mac, Apple TV and Android.">
+  <meta property="og:title" content="PowerSlave Developments — turning ideas into reality">
+  <meta property="og:description" content="A senior engineering consultancy. Two consultant engineer managers plus modern AI tooling, shipping at the speed of a large team — and rescuing the projects that have stalled.">
   <meta property="og:url" content="https://powerslave.dev/">
   <meta name="twitter:card" content="summary">
 
@@ -38,11 +44,12 @@
 
   <div class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="index.html"><span class="dot"></span> PowerSlave Developments</a>
+      <a class="brand" href="index.html" aria-current="page"><span class="dot"></span> PowerSlave Developments</a>
       <nav class="topnav" aria-label="Main">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="#apps">Apps</a>
+        <a href="services.html">Services</a>
         <a href="work.html">Work</a>
+        <a href="apps.html">Apps</a>
+        <a href="team.html">Team</a>
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
       </nav>
@@ -52,198 +59,126 @@
   <main id="main" class="wrap">
 
     <header class="hero">
-      <p class="eyebrow">Independent app studio</p>
-      <h1>We publish our own apps — and help build yours.</h1>
-      <p class="lede">PowerSlave Developments ships native apps for iPhone, iPad, Mac, Apple&nbsp;TV and Android, and has architected and led mobile products for broadcasters, banks, travel companies and retailers. Our oldest app has been in the Apple App&nbsp;Store for <span data-years-since="2010-09-17">15</span>&nbsp;years.</p>
+      <p class="eyebrow">Senior engineering consultancy · Dubai · Bristol · Budapest</p>
+      <h1>Turning ideas into reality.</h1>
+      <p class="lede">Two consultant engineer managers, pulled along by modern AI tooling, shipping at the speed of a large team — and rescuing the projects that have stalled. We advise, architect and lead, as well as build.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#apps">Browse our apps</a>
-        <a class="btn" href="work.html">Client work</a>
-        <a class="btn" href="support.html">Get support</a>
+        <a class="btn btn-primary" href="#contact">Talk to us about a project</a>
+        <a class="btn" href="services.html">How we work</a>
       </div>
     </header>
 
-    <section id="featured" aria-labelledby="featured-h">
+    <section id="proof" aria-labelledby="proof-h">
       <div class="section-head">
-        <h2 id="featured-h">Featured</h2>
-        <span class="note">Latest release</span>
+        <h2 id="proof-h">Proof, not projection</h2>
+        <a href="apps.html">See our own apps →</a>
       </div>
 
-      <div class="card feature">
-        <img class="icon" src="icons/tvapp.png" alt="TVApp icon" width="96" height="96">
+      <div class="proof">
+        <div class="proof-figure">
+          <b>10</b>
+          <span>days</span>
+        </div>
         <div>
-          <h3>TVApp</h3>
-          <p class="tagline">Your Jellyfin library, natively.</p>
-          <p>A fast, native media player for your Jellyfin server — browse your library and play almost any format, powered by VLC. Playback position syncs back to your server, so you can stop on the Apple&nbsp;TV and pick up on your phone.</p>
-          <div class="platforms">
-            <span>Apple TV</span>
-            <span>iPhone</span>
-            <span>iPad</span>
-            <span>Mac</span>
-            <span>Android (beta)</span>
-          </div>
-          <div class="meta">
-            <span class="year">Launched 2026</span>
-            <a class="btn" href="https://apps.apple.com/app/id6788813078" target="_blank" rel="noopener">View on the App&nbsp;Store</a>
-            <a class="btn" href="support.html#beta">Join the Android beta</a>
-          </div>
+          <h3>A full cross-platform media client, built and shipped in ten days</h3>
+          <p>tvOS, iPad, macOS and Android. Streaming, transcoding and cross-device sync. Native on both sides — SwiftUI and Kotlin, not a cross-platform shortcut. Built by two people and released to the App&nbsp;Store as <a href="apps.html#featured">TVApp</a>.</p>
+          <p class="note">Writing code is no longer the expensive part. Judgement is. That's the whole philosophy behind the practice — and we test it on our own products before we bring it to yours.</p>
         </div>
       </div>
     </section>
 
-    <section id="apps" aria-labelledby="apps-h">
+    <section id="services" aria-labelledby="services-h">
       <div class="section-head">
-        <h2 id="apps-h">The rest of the catalogue</h2>
-        <span class="note">Five more titles</span>
+        <h2 id="services-h">What do you need from us?</h2>
+        <a href="services.html">All services →</a>
       </div>
 
-      <div class="apps">
-
-        <div class="card app">
-          <img class="icon" src="icons/contagion.png" alt="Contagion icon" width="60" height="60">
-          <div>
-            <h3>Contagion</h3>
-            <p>A roguelike raid game with permadeath — push deeper through brutal levels where a single mistake ends the run.</p>
-            <div class="platforms">
-              <span>iPhone</span>
-              <span>iPad</span>
-            </div>
-            <div class="meta">
-              <span class="year">Launched 2019</span>
-              <a class="store" href="https://apps.apple.com/app/id1456397818" target="_blank" rel="noopener">App&nbsp;Store →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card app">
-          <img class="icon" src="icons/jetpack.png" alt="JetPack icon" width="60" height="60">
-          <div>
-            <h3>JetPack</h3>
-            <p>A fast 2D action shooter — pilot a jetpack craft through waves of 18 enemy types, grabbing power-ups as the difficulty climbs.</p>
-            <div class="platforms">
-              <span>iPhone</span>
-              <span>iPad</span>
-            </div>
-            <div class="meta">
-              <span class="year">Launched 2019</span>
-              <a class="store" href="https://apps.apple.com/app/id1472551316" target="_blank" rel="noopener">App&nbsp;Store →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card app">
-          <img class="icon" src="icons/treewise.png" alt="TreeWise icon" width="60" height="60">
-          <div>
-            <h3>TreeWise <span class="sub">— GetWise with Trees</span></h3>
-            <p>A pocket field guide to the trees around you. Identify 55 species by leaves, bark, and seeds, see when each flowers and fruits, and log your own sightings with photos.</p>
-            <div class="platforms">
-              <span>iPhone</span>
-              <span>iPad</span>
-            </div>
-            <div class="meta">
-              <span class="year">Launched 2010</span>
-              <a class="store" href="https://apps.apple.com/app/id391327208" target="_blank" rel="noopener">App&nbsp;Store →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card app">
-          <img class="icon" src="icons/mapwanderer.png" alt="Map Wanderer icon" width="60" height="60">
-          <div>
-            <h3>Map Wanderer</h3>
-            <p>A topographic outdoor map for hiking and cycling — height-labelled contours and hillshade relief, GPS track recording, route planning, and hand-built trails you can share.</p>
-            <div class="platforms">
-              <span>iPhone</span>
-              <span>iPad</span>
-            </div>
-            <div class="meta">
-              <span class="badge">Coming soon</span>
-              <a class="store" href="privacy-wanderer.html">Privacy →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card app">
-          <div class="icon placeholder" aria-hidden="true">🌶️</div>
-          <div>
-            <h3>Paprika</h3>
-            <!-- TODO: one-line description once Paprika is announced -->
-            <p>A new app from PowerSlave Developments — details coming soon.</p>
-            <div class="meta">
-              <span class="badge">Coming soon</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add more apps here as you ship them -->
-      </div>
-    </section>
-
-    <section id="work" aria-labelledby="work-h">
-      <div class="section-head">
-        <h2 id="work-h">…and we help build yours</h2>
-        <a href="work.html">See all client work →</a>
-      </div>
-      <p class="lede-sm">Sometimes that means building a product from nothing. More often it means joining something already in flight — and getting it moving again.</p>
+      <p class="lede-sm">That means building a product from nothing. More often it means joining something already in flight — and getting it moving again.</p>
 
       <div class="services">
 
         <div class="card service">
-          <h3>Fix failing projects</h3>
-          <p>Late, over budget, or quietly stalled. We find what's actually wrong rather than what's being blamed, and get it shipping.</p>
+          <h3>Rescue &amp; acceleration</h3>
+          <p>A project that's stuck, a bug no one can crack, a deadline slipping away. We diagnose fast, fix the "impossible", and give the project the boost it needs.</p>
         </div>
 
         <div class="card service">
-          <h3>Push projects over the line</h3>
-          <p>The last 20% that never seems to end. We finish the unfinished sections, stabilise the build, and get it out of the door.</p>
+          <h3>Rapid builds</h3>
+          <p>Idea to working software in days, not quarters — a prototype, an MVP, or a full product. No ceremony, no backlog theatre.</p>
         </div>
 
         <div class="card service">
-          <h3>Troubleshoot</h3>
-          <p>Crashes, memory leaks, playback that only fails on one device. The hard-to-reproduce problems that have been open for months.</p>
+          <h3>Fractional CTO &amp; AI advisory</h3>
+          <p>Senior technical leadership at a fraction of a full-time hire: architecture, AI strategy, process, mentoring and the judgement to know what's worth building.</p>
         </div>
 
         <div class="card service">
-          <h3>Mentor</h3>
-          <p>Bring a team up to speed on a platform, a language, or modern practice — and leave them able to run it without us.</p>
+          <h3>SDKs &amp; platform work</h3>
+          <p>Reusable SDKs, white-label apps and platform components — an area both principals have shipped repeatedly.</p>
         </div>
 
-        <div class="card service">
-          <h3>Steer</h3>
-          <p>Architecture reviews, technical direction, and standing in as lead while you hire for the role properly.</p>
-        </div>
-
-        <div class="card service">
-          <h3>Build from nothing</h3>
-          <p>Prototype to store listing, including the release pipeline and the unglamorous parts that get skipped.</p>
-        </div>
-
-      </div>
-
-      <div class="panel">
-        <p>In practice that has meant national-scale streaming and live sport, hotel and flight booking, regulated chip-and-pin banking, secure messaging, transport data platforms, and a long line of first products.</p>
-        <p>Clients have included <strong>TVPlayer</strong>, <strong>ITV</strong>, <strong>Sky Sports</strong>, <strong>Hotels.com</strong>, <strong>dnata Travel</strong>, <strong>Lloyds Banking Group</strong>, <strong>Santander</strong>, <strong>BlackBerry</strong>, <strong>Zalando</strong>, <strong>Tesco</strong> and <strong>Cognizant</strong>.</p>
-        <p class="note">Something stuck, something to finish, or something to start — <a href="#contact">get in touch</a>.</p>
       </div>
     </section>
 
-    <section id="about" aria-labelledby="about-h">
+    <section id="who" aria-labelledby="who-h">
       <div class="section-head">
-        <h2 id="about-h">Where the name came from</h2>
+        <h2 id="who-h">Who we work with</h2>
       </div>
       <div class="panel">
-        <p>Long before the apps, there was <strong>Combat Crazy</strong> — a game written for the Commodore&nbsp;64. A few of its demos still live on YouTube, and that C64 lineage is where the <em>PowerSlave</em> name traces back.</p>
-        <p class="note">Watch the Combat Crazy demos:
-          <a href="https://www.youtube.com/watch?v=ce6ANjWF1nE" target="_blank" rel="noopener">1</a> ·
-          <a href="https://www.youtube.com/watch?v=E3HL4iPAf2s" target="_blank" rel="noopener">2</a> ·
-          <a href="https://www.youtube.com/watch?v=s_soZU0UNAo" target="_blank" rel="noopener">3</a> ·
-          <a href="https://www.youtube.com/watch?v=_1KWykqLNWE" target="_blank" rel="noopener">4</a> ·
-          <a href="https://www.youtube.com/watch?v=w12udVxGQa0" target="_blank" rel="noopener">5</a> ·
-          <a href="https://www.youtube.com/watch?v=Fbzo-hl9nKQ" target="_blank" rel="noopener">6</a> ·
-          <a href="https://www.youtube.com/watch?v=QJwg2qBMHA0" target="_blank" rel="noopener">7</a> ·
-          <a href="https://www.youtube.com/watch?v=wWYcyHh05wU" target="_blank" rel="noopener">8</a> ·
-          <a href="https://www.youtube.com/watch?v=qme4a_a-3Ck" target="_blank" rel="noopener">9</a> ·
-          <a href="https://www.youtube.com/watch?v=Oc509pO-zws" target="_blank" rel="noopener">10</a>
-        </p>
+        <p class="note" style="margin-top:0">We keep the practice small, so we're selective — but the range is broad.</p>
+        <ul class="segments">
+          <li><strong>Founders &amp; startups</strong> — who need a credible product shipped fast, and often a fractional CTO to make the early architecture, commercial and hiring calls.</li>
+          <li><strong>Scale-ups &amp; enterprise</strong> — adding AI to existing products, modernising ageing mobile codebases, or bringing in senior firepower for a defined, high-stakes build.</li>
+          <li><strong>Regulated &amp; security-critical clients</strong> — in finance, payments and communications, where PCI-DSS, secure messaging and audited delivery matter.</li>
+          <li><strong>Hardware &amp; connected-device teams</strong> — building IoT or robotics products that need equally strong mobile and AI front-ends.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="team" aria-labelledby="team-h">
+      <div class="section-head">
+        <h2 id="team-h">The team</h2>
+        <a href="team.html">Full profiles →</a>
+      </div>
+
+      <div class="people">
+
+        <div class="card person">
+          <h3>Dominic Frazer-Imregh</h3>
+          <span class="role">Consultant Engineer &amp; Manager</span>
+          <span class="where">Dubai · Co-founder and CTO of RECRD</span>
+          <p>Three decades running from founding and selling a software company, through international sales and product commercialisation, into fifteen years of senior native-Apple engineering — and today co-founding a Social Video Media platform with AI.</p>
+        </div>
+
+        <div class="card person">
+          <h3>Alex Frazer</h3>
+          <span class="role">Consultant Engineer &amp; Manager</span>
+          <span class="where">Bristol, UK · Head of AI Systems and Mobile at RECRD Group</span>
+          <p>An MSc in Artificial Intelligence and a Head-of-AI-Systems practice spanning mobile, robotics and IoT — from recommendation engines and computer vision, to the native Android and iOS apps they run in, to the robots and connected devices he designs and builds.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="clients" aria-labelledby="clients-h">
+      <div class="section-head">
+        <h2 id="clients-h">Selected clients</h2>
+        <a href="work.html">See all client work →</a>
+      </div>
+      <div class="panel">
+        <p>In practice that has meant national-scale streaming and live sport, hotel and flight booking, regulated chip-and-pin banking, secure messaging, transport data platforms, and a long line of first products.</p>
+        <p>Clients have included <strong>TVPlayer</strong>, <strong>ITV</strong>, <strong>Sky Sports</strong>, <strong>Hotels.com</strong>, <strong>dnata Travel</strong>, <strong>Lloyds Banking Group</strong>, <strong>Santander</strong>, <strong>BlackBerry</strong>, <strong>Zalando</strong>, <strong>Tesco</strong> and <strong>Cognizant</strong>.</p>
+      </div>
+    </section>
+
+    <section id="own-apps" aria-labelledby="own-apps-h">
+      <div class="section-head">
+        <h2 id="own-apps-h">We ship our own</h2>
+        <a href="apps.html">Browse the apps →</a>
+      </div>
+      <div class="panel">
+        <p>Consultancies that only build for other people never feel the consequences of their decisions. We publish our own apps for iPhone, iPad, Mac, Apple&nbsp;TV and Android — a Jellyfin media player, an outdoor mapping app, a tree field guide and a couple of games — so we live with every choice we make.</p>
+        <p class="note">Our oldest has been on the App&nbsp;Store for <span data-years-since="2010-09-17">15</span>&nbsp;years.</p>
       </div>
     </section>
 
@@ -252,7 +187,7 @@
         <h2 id="contact-h">Get in touch</h2>
       </div>
       <div class="panel center">
-        <p>Questions, bugs, or feature requests — email us and we'll get back to you.</p>
+        <p>Something stuck, something to finish, or something to start — tell us what you're working on.</p>
         <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
       </div>
     </section>
@@ -263,10 +198,12 @@
     <div class="wrap">
       <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
       <div class="links">
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
         <a href="work.html">Client work</a>
+        <a href="apps.html">Our apps</a>
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy Policy</a>
-        <a href="mailto:support@powerslave.dev">Email</a>
       </div>
     </div>
   </footer>
@@ -274,8 +211,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Keep "in the App Store for N years" accurate without anyone editing it.
-       Counts COMPLETED years since the date in data-years-since, so it never
+    /* Counts COMPLETED years since the date in data-years-since, so it never
        overstates before the anniversary. TreeWise v1.0 went Ready for Sale on
        17 September 2010, confirmed in App Store Connect. */
     document.querySelectorAll('[data-years-since]').forEach(function (el) {
