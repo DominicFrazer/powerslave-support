@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Support — PowerSlave Developments</title>
-  <meta name="description" content="Help for apps by PowerSlave Developments — TVApp, Map Wanderer, TreeWise, Contagion and JetPack. Per-app FAQs, Android beta instructions, and a direct line to the developer.">
+  <meta name="description" content="Help for apps by PowerSlave Developments — TVApp, TreeWise, PhotoWise, Map Wanderer, Contagion and JetPack. Per-app FAQs, Android beta instructions, and a direct line to the developer.">
   <link rel="canonical" href="https://powerslave.dev/support.html">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -50,6 +50,7 @@
         <a class="btn" href="#tvapp">TVApp</a>
         <a class="btn" href="#mapwanderer">Map Wanderer</a>
         <a class="btn" href="#treewise">TreeWise</a>
+        <a class="btn" href="#photowise">PhotoWise</a>
         <a class="btn" href="#games">Games</a>
       </div>
     </header>
@@ -182,6 +183,39 @@
       <details>
         <summary>Where are my sightings and photos stored?</summary>
         <p>On your device only. Sightings you log, including any photos you attach, are never sent to PowerSlave Developments — see the <a href="privacy.html">privacy policy</a>. Removing the app deletes them, so back up anything you want to keep.</p>
+      </details>
+    </section>
+
+    <section id="photowise" class="faq" aria-labelledby="photowise-h">
+      <div class="section-head">
+        <h2 id="photowise-h">PhotoWise</h2>
+        <span class="note">iPhone · iPad</span>
+      </div>
+
+      <details>
+        <summary>Is PhotoWise available yet?</summary>
+        <p>Not yet — it's coming soon for iPhone and iPad. <a href="apps.html#apps">See the listing</a> for what it does.</p>
+      </details>
+
+      <details>
+        <summary>What can a child actually do with it?</summary>
+        <p>Five activities. <strong>Spot it</strong> names what the camera is pointed at, and can be taught new things. <strong>Frame it</strong> scores a photo's composition out of 100 against a chosen guide. <strong>Colours</strong> breaks a picture down into its named colours and their proportions. <strong>Mirror</strong> reflects half a face to build a symmetrical one. <strong>Filters</strong> tries a look on all or part of the picture. There's also a Show Off mode for demonstrating what it has been taught to someone else.</p>
+      </details>
+
+      <details>
+        <summary>Does PhotoWise use AI? Where does it run?</summary>
+        <p>Yes, and all of it runs on your device. Recognition uses Apple's built-in Vision classifier — around 1,300 categories — plus a nearest-neighbour match against whatever your child has taught it. Composition scoring uses saliency, horizon detection and Apple's aesthetics model.</p>
+        <p>None of it is a chatbot or a cloud service. The app ships no model files of its own, contains no networking code, and sends nothing anywhere to be analysed. When your child teaches it something, what gets saved is a numeric fingerprint of the image in a file on the device — not the picture uploaded to train a model somewhere. <strong>My Brain</strong> lists everything that has been taught and can forget any of it.</p>
+      </details>
+
+      <details>
+        <summary>Does it need an internet connection?</summary>
+        <p>No. PhotoWise contains no networking code at all — recognition, composition scoring, colour analysis, mirroring and filters all run on the device. It works fully offline.</p>
+      </details>
+
+      <details>
+        <summary>Where do the photos and the things my child teaches it go?</summary>
+        <p>They stay on the device and are never sent to us. The <strong>My Brain</strong> screen shows everything that has been taught and lets you delete any of it. The camera stays off until a child picks an activity. See the <a href="privacy.html">privacy policy</a>.</p>
       </details>
     </section>
 
