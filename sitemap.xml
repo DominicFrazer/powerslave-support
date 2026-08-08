@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hand maintained: there is no build step. If you add or remove a page, add or
+  remove it here too, and update its lastmod. The date to use is the file's last
+  commit date, which git log will give you.
+
+  Only loc and lastmod are listed. Google ignores priority and changefreq, so
+  including them would be noise.
+
+  Note for future edits: an XML comment may not contain two consecutive hyphens,
+  which rules out writing command line flags in here.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://powerslave.dev/</loc>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/services.html</loc>
+    <lastmod>2026-08-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/work.html</loc>
+    <lastmod>2026-08-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/apps.html</loc>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/team.html</loc>
+    <lastmod>2026-08-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/support.html</loc>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/privacy.html</loc>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/privacy-wanderer.html</loc>
+    <lastmod>2026-08-06</lastmod>
+  </url>
+
+</urlset>
