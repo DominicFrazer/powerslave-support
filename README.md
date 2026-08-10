@@ -177,10 +177,16 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
   Venatus*; `JetPack` and `TreeWise` are prefixes of *JetPack Space Arcade* and *TreeWise: Tree Field
   Guide*. Keeping the site's names is a deliberate decision — but a user arriving from the Brigands
   listing won't see it named in the privacy policy.
-- **The LinkedIn originals are still the canonical copy in Google's eyes** for anything it indexed before
-  these pages existed, and a `rel="canonical"` can't be set on a LinkedIn article. The fix is to trim each
-  LinkedIn version to an intro plus a link to the page here, which keeps LinkedIn's distribution and moves
-  the ranking signal onto this domain. Not done yet.
+- **The LinkedIn originals are left at full length on purpose. This is a decision, not an oversight — don't
+  "fix" it.** For anything Google indexed before these pages existed, LinkedIn is the canonical copy in its
+  eyes, and `rel="canonical"` can't be set on a LinkedIn article. The available remedy is to trim each
+  LinkedIn version to an intro plus a link to the page here, which keeps LinkedIn's distribution while
+  leaving only one full copy of the text for Google to rank. That is on hold because linking back to
+  powerslave.dev from LinkedIn isn't wanted yet.
+
+  What it costs while it stays on hold: both copies remain live and LinkedIn keeps the ranking for that
+  text. Nothing else on the site is affected, and nothing here needs changing when the decision changes —
+  the trimmed text is derived from `articles/src/`, so it can be regenerated on demand.
 - **Two `TODO`s are still live in shipped markup.** `apps.html` needs the Paprika one-liner once it is
   announced, and `support.html` needs real support content for two of the games — controls, saving and
   progress. Both need product facts rather than copywriting.
