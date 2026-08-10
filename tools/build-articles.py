@@ -381,6 +381,7 @@ def article_page(entry, meta, prev_entry, next_entry):
 
   <link rel="alternate" type="application/atom+xml" href="../feed.xml" title="Articles — PowerSlave Developments">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
@@ -468,6 +469,7 @@ def index_page(entries):
 
   <link rel="alternate" type="application/atom+xml" href="feed.xml" title="Articles — PowerSlave Developments">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 

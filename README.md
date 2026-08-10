@@ -23,7 +23,8 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | `style.css` | Shared styling — design tokens, dark and light themes |
 | `404.html` | Not-found page. GitHub Pages serves it for any unknown path |
 | `feed.xml` | Atom feed for the articles. **Generated** |
-| `favicon.svg` | Brand mark |
+| `favicon.svg` | The symbol mark — gradient squircle with a P. Browser tab and bookmarks |
+| `apple-touch-icon.png` | 180×180 home-screen icon. At the root deliberately — see the conventions |
 | `icons/` | App icons, 384×384 PNG (displayed at 60–96px) |
 | `images/articles/` | Article heroes at 1600px, plus `-800` and `-400` variants for `srcset` |
 | `images/og-default.png` | The 1200×630 social card every page but the articles unfurls with |
@@ -79,6 +80,16 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 - **Print.** `@media print` in `style.css` sets A4 and replaces the `background-clip: text` gradients
   with solid ink — Chrome's PDF export otherwise paints their bounding boxes as visible rectangles.
   Render the set with headless Chrome: `--headless=new --no-pdf-header-footer --print-to-pdf=out.pdf`.
+- **Two brand marks, on purpose.** The wordmark (`images/logo-powerslave.svg`) is the header lockup; the
+  squircle P (`favicon.svg`) is the symbol, used for the browser tab and the home-screen icon. A 8.8:1
+  wordmark cannot be a favicon, and a symbol plus a wordmark is the normal arrangement. They share the
+  accent gradient, which is what ties them together — keep it that way if either changes.
+- **`apple-touch-icon.png` is full-bleed, square and has no alpha channel.** iOS applies its own rounded
+  mask, so pre-rounding it double-rounds the corners, and it composites transparency onto black. It also
+  lives at the repo root rather than in `images/`, because iOS looks for `/apple-touch-icon.png` when a page
+  has no `<link>` for one — so the root copy is a safety net on top of the explicit tags. Every page
+  previously pointed at an *app* icon here (`icons/tvapp.png`, and `icons/mapwanderer.png` on the Map
+  Wanderer policy), so adding the site to a home screen produced the TVApp icon.
 - **Icons** are downscaled to 384px. Originals were 1024px and totalled 3.7 MB for images rendered at
   64px. If you add one, resize it: `sips -Z 384 icons/newapp.png --out icons/newapp.png`.
 - **The specialities count is written out in three places** — the `<span class="note">` in the section
