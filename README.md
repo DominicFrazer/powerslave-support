@@ -27,8 +27,8 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | `icons/` | App icons, 384×384 PNG (displayed at 60–96px) |
 | `images/articles/` | Article heroes at 1600px, plus `-800` and `-400` variants for `srcset` |
 | `images/og-default.png` | The 1200×630 social card every page but the articles unfurls with |
-| `images/logo-powerslave.png` | The wordmark at 1560px, transparent PNG. Social card and structured-data logo |
-| `images/logo-powerslave-400.png` | The same wordmark at 400px, for the topbar. 32 KB against 404 KB, and it loads on every page |
+| `images/logo-powerslave.svg` | The wordmark, vector, 4 KB. Topbar on every page, and the social card |
+| `images/logo-powerslave.png` | The same wordmark rasterised from that SVG. **Only** for the structured-data logo |
 | `tools/build-articles.py` | Regenerates the Articles section from `articles/src/` |
 | `tools/og-image.html` | Source for `og-default.png`. Not served — see the comment in it for the render command |
 
@@ -54,9 +54,15 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
   far brighter than the ground. The result reads correctly on both themes and stays legible down to about
   15px tall.
 
-  It is a raster, and an SVG is expected. When it lands, swap the topbar and social-card `src`s for it —
-  but **keep a PNG for the `Organization` structured data**, because Google does not accept SVG for
-  `logo`. That is the one place the raster has to survive.
+  The vector arrived and is now the asset used everywhere on the page. It needed the same two fixes: the
+  supplied file had an opaque `<rect>` painting a dark radial background across the whole canvas, and the
+  watermark as a second `<path>` — the only one not filled with `url(#txt)` — at x 1664–1716, y 479–531.
+  Both were removed and the `viewBox` tightened to the glyphs. The text gradient is `userSpaceOnUse`, so
+  it stays aligned to the letters despite the new `viewBox`.
+
+  `logo-powerslave.png` is rendered *from* that SVG, so the two cannot drift, and it exists for exactly one
+  reason: **Google does not accept SVG for `Organization.logo`**. Don't reference it anywhere else, and
+  re-render it if the SVG changes.
 - **Structured data.** `index.html` carries `Organization` by hand; the article pages carry `Article` and
   `articles.html` carries `CollectionPage`, all generated. `datePublished` is deliberately absent — see
   the note under *Adding an article*.
