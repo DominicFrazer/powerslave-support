@@ -225,8 +225,8 @@ PUBLISHER = {
     "@type": "Organization",
     "name": "PowerSlave Developments",
     "url": f"{SITE}/",
-    "logo": {"@type": "ImageObject", "url": f"{SITE}/images/logo-512.png",
-             "width": 512, "height": 512},
+    "logo": {"@type": "ImageObject", "url": f"{SITE}/images/logo-powerslave.png",
+             "width": 1560, "height": 250},
 }
 
 
@@ -312,7 +312,7 @@ def chrome(prefix, current):
         for href, label in links)
     return f"""  <div class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="{prefix}index.html"><span class="dot"></span> PowerSlave Developments</a>
+      <a class="brand" href="{prefix}index.html"><img src="{prefix}images/logo-powerslave-400.png" alt="PowerSlave Developments" width="400" height="64"></a>
       <nav class="topnav" aria-label="Main">
 {nav}
       </nav>

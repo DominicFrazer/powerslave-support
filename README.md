@@ -27,7 +27,8 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | `icons/` | App icons, 384×384 PNG (displayed at 60–96px) |
 | `images/articles/` | Article heroes at 1600px, plus `-800` and `-400` variants for `srcset` |
 | `images/og-default.png` | The 1200×630 social card every page but the articles unfurls with |
-| `images/logo-512.png` | Raster logo, for the `Organization` structured data |
+| `images/logo-powerslave.png` | The wordmark at 1560px, transparent PNG. Social card and structured-data logo |
+| `images/logo-powerslave-400.png` | The same wordmark at 400px, for the topbar. 32 KB against 404 KB, and it loads on every page |
 | `tools/build-articles.py` | Regenerates the Articles section from `articles/src/` |
 | `tools/og-image.html` | Source for `og-default.png`. Not served — see the comment in it for the render command |
 
@@ -35,6 +36,9 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 
 - **Design tokens** live in `:root` at the top of `style.css`. Dark is the default; the light palette is a
   `prefers-color-scheme: light` override. Change colours there, not in component rules.
+- **The topbar brand is the wordmark alone**, with no text beside it. The artwork reads "POWERSLAVE", so
+  the link's accessible name comes entirely from `alt="PowerSlave Developments"` — that alt is the only
+  place the full company name appears in the header, so don't shorten it. The old gradient `.dot` is gone.
 - **Every page** shares the same `.topbar` markup and marks its own nav link with `aria-current="page"`.
   The nav is defined twice: literally in the nine hand-written pages, and in `chrome()` in
   `tools/build-articles.py` for the generated article pages (which need `../` on every path). **Change one
@@ -44,6 +48,15 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
   is rendered from `tools/og-image.html`, which duplicates the palette rather than linking `style.css` —
   it renders at a fixed 1200×630 with no viewport, so the `clamp()` sizes and the light-mode override
   would both fight it. Change the brand colours in one and change them in the other.
+- **The wordmark** in `images/logo-powerslave.png` was supplied as an opaque PNG on a dark ground, with a
+  generator watermark below the artwork. It was cropped to the wordmark — which removes the watermark
+  rather than painting over it — and its background keyed to transparent from luminance, the letters being
+  far brighter than the ground. The result reads correctly on both themes and stays legible down to about
+  15px tall.
+
+  It is a raster, and an SVG is expected. When it lands, swap the topbar and social-card `src`s for it —
+  but **keep a PNG for the `Organization` structured data**, because Google does not accept SVG for
+  `logo`. That is the one place the raster has to survive.
 - **Structured data.** `index.html` carries `Organization` by hand; the article pages carry `Article` and
   `articles.html` carries `CollectionPage`, all generated. `datePublished` is deliberately absent — see
   the note under *Adding an article*.

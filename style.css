@@ -163,20 +163,20 @@ h2 {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.02em;
   color: var(--text);
 }
 .brand:hover { text-decoration: none; color: var(--text); }
 
-.brand .dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  flex: 0 0 auto;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+/* The wordmark is the whole brand — there is no text beside it, so the link's
+   accessible name comes entirely from the image's alt, which carries the full
+   company name even though the artwork reads "POWERSLAVE" alone. The asset is
+   transparent and its gradient is the accent gradient, so it needs no per-theme
+   variant. Swap the src for an SVG when one exists; keep a raster around for the
+   Organization structured data, which does not accept SVG. */
+.brand img {
+  display: block;
+  height: 26px;
+  width: auto;
 }
 
 .topnav {
