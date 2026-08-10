@@ -10,7 +10,7 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | File | Purpose |
 | --- | --- |
 | `index.html` | Home — consultancy pitch, the ten-day proof block, engagement modes, audiences, both principals, clients, apps teaser, articles teaser, contact |
-| `services.html` | Services — four ways to engage us, six specialities, audiences, philosophy |
+| `services.html` | Services — four ways to engage us, seven specialities, audiences, philosophy |
 | `team.html` | Team — full profiles for both principals, and why two people |
 | `apps.html` | Our apps — featured app plus the catalogue, with language labels |
 | `work.html` | Client work — engagements by sector, from the Oct 2023 CV and the company profile |
@@ -64,8 +64,8 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
   reason: **Google does not accept SVG for `Organization.logo`**. Don't reference it anywhere else, and
   re-render it if the SVG changes.
 - **Structured data.** `index.html` carries `Organization` by hand; the article pages carry `Article` and
-  `articles.html` carries `CollectionPage`, all generated. `datePublished` is deliberately absent — see
-  the note under *Adding an article*.
+  `articles.html` carries `CollectionPage`, all generated. `datePublished` *is* emitted — dates are
+  suppressed for readers, not for machines. See the note under *Adding an article*.
 - **Responsive images.** Article heroes and index thumbnails use `srcset`. The variants are committed
   next to the originals; regenerate them with the `sips` line under *Adding an article*.
 - **`404.html` uses root-absolute paths.** GitHub Pages serves it for any unknown path at any depth, so a
@@ -81,6 +81,9 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
   Render the set with headless Chrome: `--headless=new --no-pdf-header-footer --print-to-pdf=out.pdf`.
 - **Icons** are downscaled to 384px. Originals were 1024px and totalled 3.7 MB for images rendered at
   64px. If you add one, resize it: `sips -Z 384 icons/newapp.png --out icons/newapp.png`.
+- **The specialities count is written out in three places** — the `<span class="note">` in the section
+  header on `services.html`, the page lede, and its `og:description`. Add or remove a card and all three
+  need changing; nothing computes it.
 
 ## Adding an app
 
@@ -167,9 +170,11 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
 - **Two dates in the source CV are impossible** and were reduced to years on `work.html` rather than
   guessed at: Zalando reads "Oct 2020 – Mar 2020" (published as 2019–2020), and Tignum reads
   "Jul 2019 – Sep 2020" for a stated 3-month contract (published as 2019). Correct at source if it matters.
-- **Client names on `work.html` are published as-is from the CV.** Several were agency engagements
-  (Candyspace/ITV, Cognizant) that can carry no-publicity clauses. Worth a check. The SapientNitro
-  attribution on the Lloyds entry has already been removed.
+- **Client names on `work.html` are cleared, on the grounds that they are already public.** Cognizant and
+  Candyspace/ITV both appear on Dominic's own LinkedIn profile, so naming them here adds no exposure that
+  doesn't already exist — checked and confirmed on 10 August 2026. That reasoning is the record; if a name
+  is ever removed from the profile, this page stops being covered by it. The SapientNitro attribution on
+  the Lloyds entry was removed earlier and stays removed.
 - **`JetPack Space Arcade` has supplied no privacy details to Apple.** The listing reads "the developer
   has not provided details about its privacy practices", and Apple will require them on the next update.
   The answer is Data Not Collected across every category, matching the other three apps.
@@ -193,5 +198,3 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
 - **`hiring-system-is-right` has a 125-character headline**, over Google's 110-character guidance for
   `Article`, so that page's rich result may be dropped. Left as-is because trimming misrepresents the
   title; the build prints a reminder each run.
-- **Back end and platform engineering is not one of the six specialities**, though both principals list
-  substantial back-end skills on `team.html`. Worth adding if it is work you want to be hired for.
