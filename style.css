@@ -700,6 +700,47 @@ h2 {
 .prose li { margin-bottom: 8px; }
 .prose strong { color: var(--text); }
 
+/* Testimonials ---------------------------------------------------- */
+
+.quotes {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+/* A blockquote, not a div, because it is one. Note the attribution uses <cite>
+   rather than <footer>: the global footer rule is an element selector and would
+   drop a centred 40px-margin block inside every card. */
+.quote {
+  margin: 0;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.quote p {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.quote cite {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-style: normal;
+}
+.quote cite b {
+  display: block;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+.quote cite span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 /* Articles — index listing --------------------------------------- */
 
 .post-list {
