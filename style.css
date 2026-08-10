@@ -728,14 +728,39 @@ h2 {
   padding-top: 14px;
   border-top: 1px solid var(--border);
   font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 11px;
 }
-.quote cite b {
+
+/* Initials, not photographs. A LinkedIn profile photo is the person's likeness,
+   and putting it in a card that advertises this company is a use they haven't
+   agreed to — different in kind from quoting words they wrote about us and
+   published. Swap an <img> in here per person once they've said yes.
+   aria-hidden because the name sits immediately beside it. */
+.quote .avatar {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--accent-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote .who { min-width: 0; }
+.quote .who b {
   display: block;
   color: var(--text);
   font-size: 14px;
   font-weight: 600;
 }
-.quote cite span {
+.quote .who .role {
   display: block;
   color: var(--muted);
   font-size: 13px;
