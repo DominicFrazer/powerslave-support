@@ -9,7 +9,7 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home — consultancy pitch, the ten-day proof block, engagement modes, audiences, both principals, clients, apps teaser, contact |
+| `index.html` | Home — consultancy pitch, the ten-day proof block, engagement modes, audiences, both principals, clients, apps teaser, articles teaser, contact |
 | `services.html` | Services — four ways to engage us, six specialities, audiences, philosophy |
 | `team.html` | Team — full profiles for both principals, and why two people |
 | `apps.html` | Our apps — featured app plus the catalogue, with language labels |
@@ -21,10 +21,15 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | `privacy.html` | Privacy policy (TVApp and other apps) — required by the App Store |
 | `privacy-wanderer.html` | Privacy policy for Map Wanderer (it uses third-party map/routing services, so it needs its own) |
 | `style.css` | Shared styling — design tokens, dark and light themes |
+| `404.html` | Not-found page. GitHub Pages serves it for any unknown path |
+| `feed.xml` | Atom feed for the articles. **Generated** |
 | `favicon.svg` | Brand mark |
 | `icons/` | App icons, 384×384 PNG (displayed at 60–96px) |
-| `images/articles/` | Article hero images, 1600px-wide JPEG (~300 KB each) |
+| `images/articles/` | Article heroes at 1600px, plus `-800` and `-400` variants for `srcset` |
+| `images/og-default.png` | The 1200×630 social card every page but the articles unfurls with |
+| `images/logo-512.png` | Raster logo, for the `Organization` structured data |
 | `tools/build-articles.py` | Regenerates the Articles section from `articles/src/` |
+| `tools/og-image.html` | Source for `og-default.png`. Not served — see the comment in it for the render command |
 
 ## Conventions
 
@@ -34,6 +39,19 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
   The nav is defined twice: literally in the nine hand-written pages, and in `chrome()` in
   `tools/build-articles.py` for the generated article pages (which need `../` on every path). **Change one
   and you must change the other**, or the article pages will drift out of step with the rest of the site.
+- **Social previews.** Every page carries `og:image` and `twitter:card=summary_large_image`. The nine
+  hand-written pages share `images/og-default.png`; each article points at its own hero instead. The card
+  is rendered from `tools/og-image.html`, which duplicates the palette rather than linking `style.css` —
+  it renders at a fixed 1200×630 with no viewport, so the `clamp()` sizes and the light-mode override
+  would both fight it. Change the brand colours in one and change them in the other.
+- **Structured data.** `index.html` carries `Organization` by hand; the article pages carry `Article` and
+  `articles.html` carries `CollectionPage`, all generated. `datePublished` is deliberately absent — see
+  the note under *Adding an article*.
+- **Responsive images.** Article heroes and index thumbnails use `srcset`. The variants are committed
+  next to the originals; regenerate them with the `sips` line under *Adding an article*.
+- **`404.html` uses root-absolute paths.** GitHub Pages serves it for any unknown path at any depth, so a
+  mistyped `/articles/foo.html` renders it from inside `/articles/`. Relative paths would resolve against
+  that directory and break every link and the stylesheet.
 - **Legacy anchors.** Six sections have moved off `index.html` over time. A script in its `<head>`
   forwards `#beta`, `#faq` and `#support` to `support.html`, `#apps` to `apps.html`, `#about` to
   `team.html` and `#work` to `services.html`, so old inbound links (App Store support URL, the Google
@@ -70,8 +88,14 @@ markdown and the script's manifest.
    First paragraph…
    ```
 
-2. Add the hero image as `images/articles/<slug>.jpg`. Downscale it — the originals were ~2 MB each:
-   `sips -s format jpeg -s formatOptions 82 -Z 1600 in.png --out images/articles/<slug>.jpg`.
+2. Add the hero image as `images/articles/<slug>.jpg`. Downscale it — the originals were ~2 MB each —
+   and make the two `srcset` variants:
+
+   ```sh
+   sips -s format jpeg -s formatOptions 82 -Z 1600 in.png --out images/articles/<slug>.jpg
+   sips -s format jpeg -s formatOptions 80 -Z 800  images/articles/<slug>.jpg --out images/articles/<slug>-800.jpg
+   sips -s format jpeg -s formatOptions 78 -Z 400  images/articles/<slug>.jpg --out images/articles/<slug>-400.jpg
+   ```
 3. Append an entry to `ARTICLES` in `tools/build-articles.py` with the `slug`, a `blurb` (the meta
    description and the index standfirst, ~150 characters) and an `alt` describing the image.
 4. Run `python3 tools/build-articles.py`.
@@ -88,11 +112,21 @@ Things the generator handles, so you don't have to:
 - **Social previews.** Each article gets `og:type=article`, `og:image` pointing at its hero, and real
   image dimensions read off the file with `sips`.
 - **Prev/next links**, ordered by position in `ARTICLES`, oldest first.
+- **Structured data** — `Article` per page, `CollectionPage` on the index.
+- **The Atom feed** at `feed.xml`, newest first, with autodiscovery `<link>`s on the article pages,
+  `articles.html` and the home page.
+- **A warning if a headline runs over Google's 110-character guidance**, which risks the `Article` rich
+  result being dropped for that page. `hiring-system-is-right` is 125 and is left alone deliberately:
+  trimming it would misrepresent the title. Shorten the title itself if you want that page to comply.
 
-**Dates are deliberately not shown.** The header date is still required, still parsed, and still sets the
-sitemap's `lastmod` — but no page prints it, and `article:published_time` is not emitted, because leaving
-it in lets a search result display a date the pages themselves don't. Turning dates back on is a change to
-two lines of the template (the `byline` and the index card), not a data problem.
+**Dates are suppressed for readers, not for machines.** No page prints a publication date — the byline
+reads "Published on LinkedIn" with no date, and the index cards carry none. But the date is still required
+in the source header, and it still feeds everything a machine reads: `article:published_time`, the
+`Article` schema's `datePublished`, the sitemap's `lastmod`, and the Atom feed's `<updated>` (which Atom
+makes mandatory anyway).
+
+So the rule is: dates are fine in metadata, just not in text a reader sees. Turning them back on visibly
+is a change to two lines of the template — the `byline` and the index card.
 
 ## Deploy
 
@@ -124,16 +158,15 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
   Venatus*; `JetPack` and `TreeWise` are prefixes of *JetPack Space Arcade* and *TreeWise: Tree Field
   Guide*. Keeping the site's names is a deliberate decision — but a user arriving from the Brigands
   listing won't see it named in the privacy policy.
-- **`og:image` is set on the Articles pages only** — each article unfurls with its own hero, and
-  `articles.html` borrows the newest one. The nine other pages still have no `og:image` and unfurl without
-  a preview. Needs a 1200×630 PNG.
 - **The LinkedIn originals are still the canonical copy in Google's eyes** for anything it indexed before
   these pages existed, and a `rel="canonical"` can't be set on a LinkedIn article. The fix is to trim each
   LinkedIn version to an intro plus a link to the page here, which keeps LinkedIn's distribution and moves
   the ranking signal onto this domain. Not done yet.
-- **`articles.html` isn't teased anywhere on the home page.** The articles are the "how we think" proof
-  that sits naturally between `services.html` and `work.html`, but nothing on `index.html` points at them
-  beyond the nav.
-- `apps.html` still has a `TODO` for the Paprika description.
+- **Two `TODO`s are still live in shipped markup.** `apps.html` needs the Paprika one-liner once it is
+  announced, and `support.html` needs real support content for two of the games — controls, saving and
+  progress. Both need product facts rather than copywriting.
+- **`hiring-system-is-right` has a 125-character headline**, over Google's 110-character guidance for
+  `Article`, so that page's rich result may be dropped. Left as-is because trimming misrepresents the
+  title; the build prints a reminder each run.
 - **Back end and platform engineering is not one of the six specialities**, though both principals list
   substantial back-end skills on `team.html`. Worth adding if it is work you want to be hired for.
