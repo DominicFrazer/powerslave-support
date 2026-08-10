@@ -696,6 +696,162 @@ h2 {
 .prose li { margin-bottom: 8px; }
 .prose strong { color: var(--text); }
 
+/* Articles — index listing --------------------------------------- */
+
+.post-list {
+  display: grid;
+  gap: 16px;
+}
+
+.post-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.post-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+.post-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.post-card-body { padding: 22px 24px; }
+.post-card h3 {
+  margin: 6px 0 8px;
+  font-size: 19px;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.post-card h3 a { color: var(--text); }
+.post-card h3 a:hover { color: var(--accent); text-decoration: none; }
+.post-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width: 620px) {
+  .post-card { grid-template-columns: 1fr; }
+  .post-card img { min-height: 0; aspect-ratio: 16 / 9; }
+}
+
+/* Articles — article page ---------------------------------------- */
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.article-head {
+  padding: 40px 0 8px;
+  text-align: left;
+}
+.article-head h1 {
+  margin: 12px 0 16px;
+  max-width: 30ch;
+  font-size: clamp(27px, 4.6vw, 40px);
+  line-height: 1.14;
+  letter-spacing: -0.022em;
+  color: var(--text);
+}
+.byline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.byline strong { color: var(--text); font-weight: 600; }
+
+.article-hero {
+  margin: 26px 0 34px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+.article-hero img { width: 100%; display: block; }
+
+.article-body {
+  font-size: 17.5px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.article-body > p { margin: 0 0 24px; }
+.article-body strong { color: var(--text); font-weight: 600; }
+.article-body em { color: var(--text); }
+.article-body h2 {
+  margin: 44px 0 14px;
+  font-size: clamp(21px, 3vw, 26px);
+  line-height: 1.25;
+  color: var(--text);
+}
+.article-body h3 {
+  margin: 34px 0 10px;
+  font-size: 19px;
+  color: var(--text);
+}
+.article-body ul, .article-body ol {
+  margin: 0 0 24px;
+  padding-left: 24px;
+}
+.article-body li { margin-bottom: 10px; }
+.article-body blockquote {
+  margin: 0 0 24px;
+  padding: 2px 0 2px 22px;
+  border-left: 3px solid var(--accent);
+  color: var(--text);
+  font-size: 19px;
+}
+.article-body blockquote p:last-child { margin-bottom: 0; }
+.article-body hr {
+  margin: 40px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.article-body a { text-decoration: underline; }
+
+/* Prev/next + back links at the foot of an article */
+
+.article-foot {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.article-nav {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 26px;
+}
+.article-nav a {
+  display: block;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+.article-nav a:hover {
+  border-color: var(--border-strong);
+  text-decoration: none;
+}
+.article-nav .dir {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.article-nav .next { text-align: right; }
+
 /* Footer --------------------------------------------------------- */
 
 footer {
@@ -754,6 +910,13 @@ footer .links {
 
   /* Deliberately NOT expanding href values after links. On the support page the
      link text is already the URL, so it prints the address twice. */
+
+  /* Articles: the prev/next block is navigation, so it has no place on paper.
+     Keep the hero image with its headline and don't orphan a blockquote. */
+  .article-foot { display: none; }
+  .article-hero,
+  .article-body blockquote { break-inside: avoid; page-break-inside: avoid; }
+  .article-body { font-size: 11pt; line-height: 1.6; }
 }
 
 /* Motion --------------------------------------------------------- */
