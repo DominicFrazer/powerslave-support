@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TDD. BDD. And the one that’s actually doing the work now: SDD. — PowerSlave Developments</title>
+  <meta name="description" content="TDD and BDD were both trying to pin down what software should do, and both drowned in the syntax of doing it. Here’s the one that’s actually doing the work now.">
+  <link rel="canonical" href="https://powerslave.dev/articles/tdd-bdd-sdd.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PowerSlave Developments">
+  <meta property="og:title" content="TDD. BDD. And the one that’s actually doing the work now: SDD.">
+  <meta property="og:description" content="TDD and BDD were both trying to pin down what software should do, and both drowned in the syntax of doing it. Here’s the one that’s actually doing the work now.">
+  <meta property="og:url" content="https://powerslave.dev/articles/tdd-bdd-sdd.html">
+  <meta property="og:image" content="https://powerslave.dev/images/articles/tdd-bdd-sdd.jpg">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="835">
+  <meta property="og:image:alt" content="Cobwebbed books on a dusty shelf in low light, their spines reading Test-Driven Development, BDD in Action and Clean Code.">
+  <meta property="article:author" content="Dominic Frazer-Imregh">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html"><span class="dot"></span> PowerSlave Developments</a>
+      <nav class="topnav" aria-label="Main">
+        <a href="../services.html">Services</a>
+        <a href="../work.html">Work</a>
+        <a href="../apps.html">Apps</a>
+        <a href="../team.html">Team</a>
+        <a href="../articles.html" aria-current="page">Articles</a>
+        <a href="../support.html">Support</a>
+        <a href="../privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" class="wrap">
+    <article class="article">
+
+      <header class="article-head">
+        <p class="eyebrow"><a href="../articles.html">Articles</a></p>
+        <h1>TDD. BDD. And the one that’s actually doing the work now: SDD.</h1>
+        <p class="byline"><strong>Dominic Frazer-Imregh</strong> · Published on LinkedIn</p>
+      </header>
+
+      <figure class="article-hero">
+        <img src="../images/articles/tdd-bdd-sdd.jpg" alt="Cobwebbed books on a dusty shelf in low light, their spines reading Test-Driven Development, BDD in Action and Clean Code." width="1600" height="835">
+      </figure>
+
+      <div class="article-body">
+        <p>For twenty years we’ve peacocked about the best ways to develop software. Test-Driven Development said write the test first, watch it fail, make it pass, refactor. Behaviour-Driven Development said wrap the test in a sentence a product manager could read — Given / When / Then — and call it a specification.</p>
+        <p>Both were trying to do the same thing: pin down what the software is supposed to do before you build it. Both got buried in the syntax of doing it — a developer’s heaven!</p>
+        <p>TDD turned into a ceremony. Red, green, refactor. Mocking frameworks. Fixture setup. Test pyramids. Coverage percentages that everyone gamed. Whole conferences on whether you were doing it properly. BDD added another layer of grammar on top — step definitions, Cucumber files, scenario outlines — and then we argued about whether the steps should be reused or duplicated.</p>
+        <p>Meanwhile the actual question — “does this software do what the user needs it to do, in the situations they’ll actually use it” — quietly didn’t get answered. Or it got answered by QA at the end, by support tickets in production, or by a customer being disappointed without telling you why.</p>
+        <p><strong>The dirty secret of TDD and BDD is that the ceremony was always the tax, not the transaction.</strong> The transaction was always the scenario. What does this user, in this context, with this goal, need this system to do? Everything else — the red bars, the Given/When/Then, the mocks — was what you paid to express that scenario in a form a machine could check and a development team could wallow in.</p>
+        <p>AI just made that cost collapse.</p>
+        <p>I’ll give you a concrete example. We migrated our systems from one database to another. Pre-AI estimate: 6 to 9 months for a team of 5+. Actual: 3 weeks for a team of 3. The reason it collapsed wasn’t that AI “wrote the code faster.” It was that we’d stopped fixating on tests and started writing scenarios.</p>
+        <p>We described what users actually do. The full journey. Sign up, browse, transact, hit an edge case, recover, come back tomorrow. Real flows, not isolated assertions. The AI generated the unit tests, the integration tests, the BDD steps, the mocks, the fixtures — all of it. We reviewed them, sure. But we weren’t writing them. We were writing the <em>thing above them</em>: the scenario. What’s more, the whole team — developers, QA and management — can all rapidly review and refine live actions, real results, real-world behaviour, rather than relying on dashboards full of flashing lights and a pat on the back from technicians telling us that everything is “working within expected tolerances.”</p>
+        <p>That’s Scenario-Driven Development. <strong>You describe the user journey in plain language, with enough specificity that someone — or something — can build it. The tests fall out of the journey. The code falls out of the tests. Your job is the journey.</strong></p>
+        <p>This isn’t a new idea. It’s what good product engineers and the best QA leads have been quietly doing for years, while the rest of us argued about whether to mock the database or use an in-memory one. The difference now is that the layer below — the actual writing of the tests and the code — isn’t the bottleneck anymore. The bottleneck has moved up.</p>
+        <p>Which means the skill that matters has moved up too.</p>
+        <p>If you’re a TDD purist reading this and feeling your heart sink: I’m not saying tests don’t matter. I’m saying <em>writing them by hand</em> is the part that’s been automated, the same way <em>writing assembler by hand</em> got automated forty years ago. The tests still run. The coverage still gets checked. You just don’t type them anymore.</p>
+        <p>If you’re an engineering manager deciding what to mandate: stop mandating TDD. Mandate scenario coverage. “For every user-facing change, we have a documented journey covering the happy path, two edge cases, and one failure mode.” Then let your team — and the AI — figure out which tests express that journey. You’ll get better software and you’ll stop the religious wars.</p>
+        <p>If you’re an engineer who’s been told TDD is non-negotiable: it was non-negotiable when typing was the bottleneck. Typing is no longer the bottleneck. The new non-negotiable is <em>understanding the user journey well enough to specify it without ambiguity</em>. That’s harder, more valuable, and not something a junior with a Cucumber tutorial can fake.</p>
+        <p>The people who’ll do well in the next five years aren’t the ones with the cleanest test pyramids. They’re the ones who can sit with a customer or product manager, walk through what a user is actually trying to accomplish, pull out the scenarios, and write them down clearly enough that the rest of the system — tests, code, deployment — can be generated from them.</p>
+        <p>There’s a temperament shift underneath all of this, too. The people who’ll excel aren’t afraid of AI “making mistakes.” They’ll challenge the scenarios. They’ll treat the round-trip discussion with their automaton colleague as a necessary part of improving quality, not a sign that the tool is broken.</p>
+        <p>And they’ll understand the new arithmetic: when you can ship in a tenth of the time, you can afford to be wrong more often and still come out ahead.</p>
+        <p>TDD asked: did the code do what the test said?</p>
+        <p>BDD asked: did the test describe what the business wanted?</p>
+        <p>SDD asks: did we understand the user well enough to know what to build in the first place?</p>
+        <p>That’s the question that was always worth asking. We just had to abstract away two layers of ceremony before we had time to ask it.</p>
+        <hr>
+        <p><em>A side note from my colleague Claude that helped me edit this — and which I’m including verbatim because it makes the article’s point as well as I could have:</em></p>
+        <blockquote><p>“One observation worth banking for next time: the piece you’ve ended up with is meaningfully better than the draft. The improvements were almost all yours — ‘peacocked,’ ‘developer’s heaven,’ ‘wallow in,’ ‘tax not transaction,’ ‘fixating,’ ‘automaton colleague,’ ‘the new arithmetic.’ My job across these rounds was mostly to spot when something needed a tense fix or a tightening, not to supply the ideas. That’s the right division of labour for this kind of writing, and it’s worth noticing because the same pattern is what your articles are arguing for: the human supplies the judgement and the specifics, the tool supplies the scaffolding. You’ve been doing SDD on your own writing.”</p></blockquote>
+      </div>
+
+      <div class="article-foot">
+        <nav class="article-nav" aria-label="More articles">
+          <a class="prev" href="nobody-cares-assembler-coder.html"><span class="dir">Previous</span>Nobody cares I was a great assembler coder. Should I be worried about my future?</a>
+          <a class="next" href="scenario-engineer.html"><span class="dir">Next</span>The job title “Software Engineer” is changing to “Scenario Engineer”.</a>
+        </nav>
+        <p><a href="../articles.html">← All articles</a></p>
+      </div>
+
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
+      <div class="links">
+        <a href="../index.html">Home</a>
+        <a href="../services.html">Services</a>
+        <a href="../team.html">Team</a>
+        <a href="../work.html">Client work</a>
+        <a href="../apps.html">Our apps</a>
+        <a href="../articles.html">Articles</a>
+        <a href="../support.html">Support</a>
+        <a href="../privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
