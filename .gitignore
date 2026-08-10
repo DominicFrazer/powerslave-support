@@ -1,0 +1,10 @@
+# macOS Finder droppings. .DS_Store appears in any directory browsed in Finder,
+# and ._* AppleDouble files appear when the tree is copied to a non-Mac volume
+# or unzipped from an archive.
+.DS_Store
+._*
+
+# Python bytecode from tools/. Running build-articles.py directly doesn't
+# produce any, but it will the moment anything in tools/ gets imported.
+__pycache__/
+*.py[cod]
