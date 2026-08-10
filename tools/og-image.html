@@ -5,15 +5,9 @@
   Not served to anyone; it exists so the card can be regenerated instead of
   re-drawn.
 
-  Two things to know before editing:
-
-  1. images/logo-powerslave.png has no alpha channel — its black background is
-     baked in. `mix-blend-mode: screen` drops that black out against a dark
-     ground while preserving the chrome and the green glow, which keying the
-     black would have punched holes in. It only works over a DARK background.
-  2. The ground is deliberately near-neutral rather than carrying the site's
-     blue/purple accent glow. The logo's neon is green; the two fight each other
-     if both are on the card. The logo supplies the colour here.
+  images/logo-powerslave.png is a real transparent PNG, so it needs no blend
+  tricks and sits on the site's own accent glow without fighting it — its gradient
+  is the brand gradient. Keep the palette here in step with :root in style.css.
 
   Render from the repo root:
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
@@ -35,8 +29,9 @@
 
   body {
     background:
-      radial-gradient(1000px 560px at 50% -30%, rgba(255, 255, 255, 0.07), transparent 64%),
-      #07080b;
+      radial-gradient(900px 520px at 20% -20%, rgba(108, 140, 255, 0.26), transparent 62%),
+      radial-gradient(720px 460px at 94% 116%, rgba(160, 108, 255, 0.20), transparent 60%),
+      #0b0d12;
     color: #e7e9ee;
     font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Helvetica, Arial, sans-serif;
@@ -48,10 +43,9 @@
   }
 
   .logo {
-    width: 760px;
+    width: 680px;
     height: auto;
     display: block;
-    mix-blend-mode: screen;
   }
 
   h1 {
@@ -60,7 +54,7 @@
     line-height: 1.06;
     letter-spacing: -0.03em;
     font-weight: 700;
-    color: #f2f4f8;
+    color: #eef1f7;
   }
 
   .foot {
@@ -89,7 +83,7 @@
 <body>
 
   <img class="logo" src="../images/logo-powerslave.png"
-       alt="PowerSlave" width="1600" height="329">
+       alt="PowerSlave" width="1560" height="250">
 
   <h1>Turning ideas into reality.</h1>
 
