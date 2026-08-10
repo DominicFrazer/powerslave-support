@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Articles — PowerSlave Developments</title>
+  <subtitle>What AI actually changes about senior engineering.</subtitle>
+  <link href="https://powerslave.dev/feed.xml" rel="self"/>
+  <link href="https://powerslave.dev/articles.html"/>
+  <id>https://powerslave.dev/articles.html</id>
+  <updated>2026-08-10T00:00:00Z</updated>
+  <author>
+    <name>Dominic Frazer-Imregh</name>
+    <uri>https://powerslave.dev/team.html</uri>
+  </author>
+  <rights>© PowerSlave Developments</rights>
+
+  <entry>
+    <title>AI made our measurement problem worse, not better.</title>
+    <link href="https://powerslave.dev/articles/measurement-problem.html"/>
+    <id>https://powerslave.dev/articles/measurement-problem.html</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <summary>AI accelerates whatever direction you’re pointed in, including deeper into a hole you didn’t know you were in. When the measurement is wrong, free typing makes it worse.</summary>
+  </entry>
+  <entry>
+    <title>I’m not an AI Guru. I’m an LLM user.</title>
+    <link href="https://powerslave.dev/articles/not-an-ai-guru.html"/>
+    <id>https://powerslave.dev/articles/not-an-ai-guru.html</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <summary>Like a racing driver, I’m expert at using the tool — not at building it. Don’t call me a mechanic when all I do is sit behind the wheel and press the gas.</summary>
+  </entry>
+  <entry>
+    <title>The daily standup is dead. We replaced it with a kitchen.</title>
+    <link href="https://powerslave.dev/articles/daily-standup-is-dead.html"/>
+    <id>https://powerslave.dev/articles/daily-standup-is-dead.html</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <summary>Fifteen minutes, three questions, reported blindly to people who aren’t really listening. We stopped doing it and replaced it with a kitchen.</summary>
+  </entry>
+  <entry>
+    <title>Sir/Madam Agent — do you actually know who you’re selling me?</title>
+    <link href="https://powerslave.dev/articles/sir-madam-agent.html"/>
+    <id>https://powerslave.dev/articles/sir-madam-agent.html</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <summary>An open letter to every agency with a “carefully curated bench of senior talent” — three questions I’d like answered before you send me a single CV.</summary>
+  </entry>
+  <entry>
+    <title>1000 applicants, 3 jobs.</title>
+    <link href="https://powerslave.dev/articles/1000-applicants-3-jobs.html"/>
+    <id>https://powerslave.dev/articles/1000-applicants-3-jobs.html</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <summary>Three roles, a thousand applicants, and why I’m hiring mid-level rather than senior or junior. How you choose when the funnel is beyond human reading.</summary>
+  </entry>
+  <entry>
+    <title>Claude told me 42. I never asked the question.</title>
+    <link href="https://powerslave.dev/articles/claude-told-me-42.html"/>
+    <id>https://powerslave.dev/articles/claude-told-me-42.html</id>
+    <updated>2026-05-06T00:00:00Z</updated>
+    <summary>Deep Thought answered 42 because nobody had understood the question. The same thing happens with an LLM on a Tuesday afternoon, and noticing is your job.</summary>
+  </entry>
+  <entry>
+    <title>My CEO built his own battle station.</title>
+    <link href="https://powerslave.dev/articles/ceo-built-his-own-battle-station.html"/>
+    <id>https://powerslave.dev/articles/ceo-built-his-own-battle-station.html</id>
+    <updated>2026-05-02T00:00:00Z</updated>
+    <summary>My CEO sent me a two-page technical specification he hadn’t read, titled “Yo, I have spec for you”. What happens when the people above you can build their own proofs.</summary>
+  </entry>
+  <entry>
+    <title>I’ve been writing code since the ’80s and Apple apps since iOS 3. I’d never get hired today — and the hiring system is right.</title>
+    <link href="https://powerslave.dev/articles/hiring-system-is-right.html"/>
+    <id>https://powerslave.dev/articles/hiring-system-is-right.html</id>
+    <updated>2026-04-28T00:00:00Z</updated>
+    <summary>I’ve written code since the ’80s and shipped Apple apps since iOS 3. I’d never get hired today — and the uncomfortable part is that the funnel isn’t wrong.</summary>
+  </entry>
+  <entry>
+    <title>The job title “Software Engineer” is changing to “Scenario Engineer”.</title>
+    <link href="https://powerslave.dev/articles/scenario-engineer.html"/>
+    <id>https://powerslave.dev/articles/scenario-engineer.html</id>
+    <updated>2026-04-26T00:00:00Z</updated>
+    <summary>My QA fix their own bugs and my PMs ship features. The engineering role isn’t being replaced — it’s unbundling, and the pieces are landing in unexpected hands.</summary>
+  </entry>
+  <entry>
+    <title>TDD. BDD. And the one that’s actually doing the work now: SDD.</title>
+    <link href="https://powerslave.dev/articles/tdd-bdd-sdd.html"/>
+    <id>https://powerslave.dev/articles/tdd-bdd-sdd.html</id>
+    <updated>2026-04-25T00:00:00Z</updated>
+    <summary>TDD and BDD were both trying to pin down what software should do, and both drowned in the syntax of doing it. Here’s the one that’s actually doing the work now.</summary>
+  </entry>
+  <entry>
+    <title>Nobody cares I was a great assembler coder. Should I be worried about my future?</title>
+    <link href="https://powerslave.dev/articles/nobody-cares-assembler-coder.html"/>
+    <id>https://powerslave.dev/articles/nobody-cares-assembler-coder.html</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <summary>6502 assembler to Swift, and why none of it matters to a hiring manager today. AI isn’t a threat to engineering — it’s the next layer of abstraction.</summary>
+  </entry>
+
+</feed>

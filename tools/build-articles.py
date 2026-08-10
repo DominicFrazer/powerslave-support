@@ -8,11 +8,12 @@ repo root after editing a source file or the template:
 
     python3 tools/build-articles.py
 
-It writes articles/<slug>.html for every entry in ARTICLES, plus articles.html.
-Nothing else in the repo is touched.
+It writes articles/<slug>.html for every entry in ARTICLES, plus articles.html
+and feed.xml. Nothing else in the repo is touched.
 """
 
 import html
+import json
 import re
 import subprocess
 import sys
@@ -218,6 +219,85 @@ def dimensions(path):
     return w.group(1), h.group(1)
 
 
+# --- structured data ---------------------------------------------------------
+
+PUBLISHER = {
+    "@type": "Organization",
+    "name": "PowerSlave Developments",
+    "url": f"{SITE}/",
+    "logo": {"@type": "ImageObject", "url": f"{SITE}/images/logo-512.png",
+             "width": 512, "height": 512},
+}
+
+
+def ld(data, indent="  "):
+    """Serialise as a JSON-LD script block. json.dumps escapes what needs
+    escaping and emits real UTF-8, so the curly quotes in titles survive."""
+    body = json.dumps(data, indent=2, ensure_ascii=False)
+    body = "\n".join(indent + line for line in body.splitlines())
+    return f'{indent}<script type="application/ld+json">\n{body}\n{indent}</script>'
+
+
+def article_ld(entry, meta, w, h):
+    """Article schema. datePublished is present because the dates are only
+    suppressed for readers, not for machines — same call as the sitemap and the
+    feed. Nothing here renders on the page."""
+    return ld({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": smarten(meta["title"]),
+        "description": smarten(entry["blurb"]),
+        "image": {
+            "@type": "ImageObject",
+            "url": f"{SITE}/images/articles/{entry['slug']}.jpg",
+            "width": int(w),
+            "height": int(h),
+        },
+        "author": {"@type": "Person", "name": AUTHOR, "url": f"{SITE}/team.html"},
+        "publisher": PUBLISHER,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": f"{SITE}/articles/{entry['slug']}.html",
+        },
+        "isPartOf": {
+            "@type": "Blog",
+            "name": "Articles — PowerSlave Developments",
+            "@id": f"{SITE}/articles.html",
+        },
+        "datePublished": meta["iso"],
+        "inLanguage": "en-GB",
+        "wordCount": len(meta["body"].split()),
+    })
+
+
+def index_ld(entries):
+    """The index as a collection, with the articles as an ordered list. Newest
+    first, matching the order they are rendered in."""
+    return ld({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Articles — PowerSlave Developments",
+        "url": f"{SITE}/articles.html",
+        "isPartOf": {"@type": "WebSite", "name": "PowerSlave Developments",
+                     "url": f"{SITE}/"},
+        "publisher": PUBLISHER,
+        "inLanguage": "en-GB",
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": len(entries),
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": i,
+                    "url": f"{SITE}/articles/{e['slug']}.html",
+                    "name": smarten(e["meta"]["title"]),
+                }
+                for i, e in enumerate(reversed(entries), start=1)
+            ],
+        },
+    })
+
+
 # --- templates ---------------------------------------------------------------
 
 def chrome(prefix, current):
@@ -295,14 +375,18 @@ def article_page(entry, meta, prev_entry, next_entry):
   <meta property="og:image:width" content="{w}">
   <meta property="og:image:height" content="{h}">
   <meta property="og:image:alt" content="{alt}">
+  <meta property="article:published_time" content="{meta['iso']}">
   <meta property="article:author" content="{AUTHOR}">
   <meta name="twitter:card" content="summary_large_image">
 
+  <link rel="alternate" type="application/atom+xml" href="../feed.xml" title="Articles — PowerSlave Developments">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
   <link rel="stylesheet" href="../style.css">
+
+{article_ld(entry, meta, w, h)}
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -319,7 +403,11 @@ def article_page(entry, meta, prev_entry, next_entry):
       </header>
 
       <figure class="article-hero">
-        <img src="../images/articles/{slug}.jpg" alt="{alt}" width="{w}" height="{h}">
+        <img src="../images/articles/{slug}.jpg"
+             srcset="../images/articles/{slug}-800.jpg 800w,
+                     ../images/articles/{slug}.jpg 1600w"
+             sizes="(max-width: 760px) 100vw, 720px"
+             alt="{alt}" width="{w}" height="{h}">
       </figure>
 
       <div class="article-body">
@@ -344,7 +432,12 @@ def index_page(entries):
         slug, meta = entry["slug"], entry["meta"]
         w, h = dimensions(IMG / f"{slug}.jpg")
         cards.append(f"""        <article class="card post-card">
-          <img src="images/articles/{slug}.jpg" alt="{attr(entry['alt'])}" width="{w}" height="{h}" loading="lazy">
+          <img src="images/articles/{slug}.jpg"
+               srcset="images/articles/{slug}-400.jpg 400w,
+                       images/articles/{slug}-800.jpg 800w,
+                       images/articles/{slug}.jpg 1600w"
+               sizes="(max-width: 620px) 100vw, 200px"
+               alt="{attr(entry['alt'])}" width="{w}" height="{h}" loading="lazy">
           <div class="post-card-body">
             <h3><a href="articles/{slug}.html">{attr(meta['title'])}</a></h3>
             <p>{attr(entry['blurb'])}</p>
@@ -373,11 +466,14 @@ def index_page(entries):
   <meta property="og:image" content="{SITE}/images/articles/{entries[-1]['slug']}.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
+  <link rel="alternate" type="application/atom+xml" href="feed.xml" title="Articles — PowerSlave Developments">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
   <link rel="stylesheet" href="style.css">
+
+{index_ld(entries)}
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -402,7 +498,7 @@ def index_page(entries):
       <div class="panel center">
         <h2>Want this thinking applied to your codebase?</h2>
         <p class="lede-sm">We take on senior engineering work — architecture reviews, AI-assisted delivery, and teams that need to ship faster than their headcount suggests.</p>
-        <a class="email" href="mailto:hello@powerslave.dev">hello@powerslave.dev</a>
+        <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
         <p class="note">Or read <a href="services.html">how we engage</a>.</p>
       </div>
     </section>
@@ -412,6 +508,46 @@ def index_page(entries):
 {footer("")}
 </body>
 </html>
+"""
+
+
+def feed_xml(entries):
+    """Atom feed, newest first.
+
+    Atom makes <updated> mandatory on the feed and on every entry, so unlike the
+    pages this does carry dates — a feed without them is not a feed. Same call as
+    the sitemap's lastmod: machine-readable plumbing, not page furniture.
+    """
+    newest = max(e["meta"]["iso"] for e in entries)
+    items = []
+    for e in reversed(entries):
+        meta = e["meta"]
+        items.append(f"""  <entry>
+    <title>{attr(meta['title'])}</title>
+    <link href="{SITE}/articles/{e['slug']}.html"/>
+    <id>{SITE}/articles/{e['slug']}.html</id>
+    <updated>{meta['iso']}T00:00:00Z</updated>
+    <summary>{attr(e['blurb'])}</summary>
+  </entry>""")
+    joined = "\n".join(items)
+    return f"""<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Articles — PowerSlave Developments</title>
+  <subtitle>What AI actually changes about senior engineering.</subtitle>
+  <link href="{SITE}/feed.xml" rel="self"/>
+  <link href="{SITE}/articles.html"/>
+  <id>{SITE}/articles.html</id>
+  <updated>{newest}T00:00:00Z</updated>
+  <author>
+    <name>{AUTHOR}</name>
+    <uri>{SITE}/team.html</uri>
+  </author>
+  <rights>© PowerSlave Developments</rights>
+
+{joined}
+
+</feed>
 """
 
 
@@ -436,6 +572,18 @@ def main():
     index = ROOT / "articles.html"
     index.write_text(index_page(entries), encoding="utf-8")
     print(f"wrote {index.relative_to(ROOT)}")
+
+    feed = ROOT / "feed.xml"
+    feed.write_text(feed_xml(entries), encoding="utf-8")
+    print(f"wrote {feed.relative_to(ROOT)}")
+
+    # Google drops the Article rich result when the headline runs long. Say so
+    # rather than silently truncating someone's title.
+    over = [(e["slug"], len(e["meta"]["title"]))
+            for e in entries if len(e["meta"]["title"]) > 110]
+    for slug, n in over:
+        print(f"note: {slug} headline is {n} chars, over Google's 110-character "
+              f"guidance — the Article rich result may be dropped")
 
 
 if __name__ == "__main__":
