@@ -3,42 +3,105 @@
 
   <url>
     <loc>https://powerslave.dev/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/services.html</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/work.html</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/apps.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/team.html</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles.html</loc>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/support.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/privacy.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-10</lastmod>
   </url>
 
   <url>
     <loc>https://powerslave.dev/privacy-wanderer.html</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+
+  <!-- Articles — lastmod is the LinkedIn publication date, newest first.
+       The dates aren't shown on the pages; this is a crawl hint only. -->
+
+  <url>
+    <loc>https://powerslave.dev/articles/measurement-problem.html</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/not-an-ai-guru.html</loc>
+    <lastmod>2026-05-28</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/daily-standup-is-dead.html</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/sir-madam-agent.html</loc>
+    <lastmod>2026-05-13</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/1000-applicants-3-jobs.html</loc>
+    <lastmod>2026-05-13</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/claude-told-me-42.html</loc>
+    <lastmod>2026-05-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/ceo-built-his-own-battle-station.html</loc>
+    <lastmod>2026-05-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/hiring-system-is-right.html</loc>
+    <lastmod>2026-04-28</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/scenario-engineer.html</loc>
+    <lastmod>2026-04-26</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/tdd-bdd-sdd.html</loc>
+    <lastmod>2026-04-25</lastmod>
+  </url>
+
+  <url>
+    <loc>https://powerslave.dev/articles/nobody-cares-assembler-coder.html</loc>
+    <lastmod>2026-04-24</lastmod>
   </url>
 
 </urlset>
