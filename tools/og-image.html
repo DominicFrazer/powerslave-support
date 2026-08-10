@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  Source for images/og-default.png — the social preview card, 1200×630.
+
+  Not served to anyone; it exists so the card can be regenerated instead of
+  re-drawn.
+
+  Two things to know before editing:
+
+  1. images/logo-powerslave.png has no alpha channel — its black background is
+     baked in. `mix-blend-mode: screen` drops that black out against a dark
+     ground while preserving the chrome and the green glow, which keying the
+     black would have punched holes in. It only works over a DARK background.
+  2. The ground is deliberately near-neutral rather than carrying the site's
+     blue/purple accent glow. The logo's neon is green; the two fight each other
+     if both are on the card. The logo supplies the colour here.
+
+  Render from the repo root:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 \
+      --screenshot=images/og-default.png tools/og-image.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PowerSlave Developments — social card</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+
+  body {
+    background:
+      radial-gradient(1000px 560px at 50% -30%, rgba(255, 255, 255, 0.07), transparent 64%),
+      #07080b;
+    color: #e7e9ee;
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 74px 88px 78px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: 760px;
+    height: auto;
+    display: block;
+    mix-blend-mode: screen;
+  }
+
+  h1 {
+    max-width: 24ch;
+    font-size: 66px;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #f2f4f8;
+  }
+
+  .foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: 28px;
+    border-top: 1px solid #23262e;
+  }
+  .foot p {
+    max-width: 62ch;
+    color: #98a1b0;
+    font-size: 22px;
+    line-height: 1.45;
+  }
+  .foot .url {
+    flex: 0 0 auto;
+    color: #e7e9ee;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+</style>
+</head>
+<body>
+
+  <img class="logo" src="../images/logo-powerslave.png"
+       alt="PowerSlave" width="1600" height="329">
+
+  <h1>Turning ideas into reality.</h1>
+
+  <div class="foot">
+    <p>Senior engineering consultancy. We advise, architect and lead, as well as build.</p>
+    <span class="url">powerslave.dev</span>
+  </div>
+
+</body>
+</html>
