@@ -431,6 +431,10 @@ h2 {
   font-size: 14px;
 }
 
+/* The related-reading line is a second paragraph in a card whose paragraphs are
+   flush, so it needs its own air to read as a note rather than a run-on. */
+.service p.note { margin-top: 12px; }
+
 /* Proof statement ------------------------------------------------ */
 
 .proof {
