@@ -753,6 +753,21 @@ h2 {
   justify-content: center;
 }
 
+/* The flag is the only thing stating the country, so it carries meaning and gets
+   real alt text rather than aria-hidden. Height is fixed and width is auto
+   because the four flags have four different ratios (2:1, 5:3, 1.9:1, 3:2) — the
+   intrinsic width/height attributes in the markup keep the box reserved. The
+   hairline stops the white in the UK and US flags bleeding into a light card. */
+.quote .flag {
+  flex: 0 0 auto;
+  margin-left: auto;
+  align-self: center;
+  height: 13px;
+  width: auto;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
 .quote .who { min-width: 0; }
 .quote .who b {
   display: block;
