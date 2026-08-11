@@ -24,6 +24,20 @@
   <meta property="og:image:alt" content="PowerSlave Developments — senior engineering consultancy. Turning ideas into reality.">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Applies a stored theme choice before the first paint, so choosing the palette
+       that isn't the system default doesn't flash the other one on every navigation.
+       The button that stores it is wired up at the end of the body. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,15 +46,22 @@
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html"><img src="images/logo-powerslave.svg" alt="PowerSlave Developments" width="1495" height="170"></a>
-      <nav class="topnav" aria-label="Main">
-        <a href="services.html" aria-current="page">Services</a>
-        <a href="work.html">Work</a>
-        <a href="apps.html">Apps</a>
-        <a href="team.html">Team</a>
-        <a href="articles.html">Articles</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
-      </nav>
+      <div class="topbar-end">
+        <nav class="topnav" aria-label="Main">
+          <a href="services.html" aria-current="page">Services</a>
+          <a href="work.html">Work</a>
+          <a href="apps.html">Apps</a>
+          <a href="team.html">Team</a>
+          <a href="articles.html">Articles</a>
+          <a href="contact.html">Contact</a>
+          <a href="support.html">Support</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" hidden>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.3M12 19.1v2.3M4.6 12H2.3M21.7 12h-2.3M6.4 6.4 4.8 4.8M19.2 19.2l-1.6-1.6M17.6 6.4l1.6-1.6M4.8 19.2l1.6-1.6"/></svg>
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -51,7 +72,7 @@
       <h1>What do you need from us?</h1>
       <p class="lede">We're consultants before we're coders. Every engagement starts with the problem you're facing and the outcome you're after — not our favourite framework. Below: four ways to engage us, and seven areas where our experience is genuinely deep.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="index.html#contact">Talk to us about a project</a>
+        <a class="btn btn-primary" href="contact.html">Talk to us about a project</a>
         <a class="btn" href="work.html">See the work</a>
       </div>
     </header>
@@ -222,7 +243,7 @@
         <h2 id="clients-h">Who we work with</h2>
       </div>
       <div class="panel">
-        <p class="note" style="margin-top:0">We keep the practice small, so we're selective — but the range is broad.</p>
+        <p class="note" style="margin-top:0">We keep the practice small — but the range is broad.</p>
         <ul class="segments">
           <li><strong>Founders &amp; startups</strong> — who need a credible product shipped fast, and often a fractional CTO to make the early architecture, commercial and hiring calls.</li>
           <li><strong>Scale-ups &amp; enterprise</strong> — adding AI to existing products, modernising ageing mobile codebases, or bringing in senior firepower for a defined, high-stakes build.</li>
@@ -277,6 +298,63 @@
       </div>
     </section>
 
+    <!-- Questions asked before an engagement, as distinct from the per-app help on
+         support.html. Everything answered here is answerable from the record on
+         work.html and team.html — commercial terms are deliberately not covered,
+         because a page is the wrong place to answer them. -->
+    <section id="faq" class="faq" aria-labelledby="faq-h">
+      <div class="section-head">
+        <h2 id="faq-h">Working with us</h2>
+        <span class="note">Before you email</span>
+      </div>
+
+      <details>
+        <summary>Do you work alongside our existing team, or replace it?</summary>
+        <p>Alongside, nearly always. Most engagements have meant slotting into a team that already exists and already has its own way of working — covering the ITV Hub+ app through a permanent-hire gap, working next to an in-house iOS team at Fanatix, mentoring developers at Tesco and Tignum, and at Hotels.com passing technical knowledge across to the Mobile Web, Android, BlackBerry, Nokia and Windows teams.</p>
+        <p>We're used to working with your designers, your server team, your product owner and your QA rather than around them. If what you need instead is a self-contained build handed back finished, that works too — say which you want.</p>
+      </details>
+
+      <details>
+        <summary>Will you take on a codebase someone else wrote?</summary>
+        <p>Yes, and it's the most common way we start. Decades of walking into other people's code mid-flight means we're just as often called in to fix what everyone else has given up on as to build from a blank page — restructuring the TVPlayer iOS and tvOS apps, rewriting a Lloyds banking codebase for two project teams, resolving critical memory and JSON faults in a property viewer, and inheriting the Vox Cinema apps and then maintaining and developing them for two years.</p>
+        <p>What you'll hear from a lot of developers and agencies is that the codebase is a mess, that the answer is to rewrite it, and that the new one will be better. We wish that were true. Usually a rewrite just moves the same problems further down the line — the decisions that made the old code awkward get made again, under deadline pressure, by people who weren't there the first time. Two years later someone is saying the same thing about the replacement.</p>
+        <p>Sometimes a rewrite genuinely is the right call, and we'll tell you when it is. But it's the most expensive option on the table, so it should have to earn that — which means understanding what is actually wrong before anyone reaches for a blank page.</p>
+        <p>You don't need to tidy it up first. Seeing it as it actually is tells us more than seeing it cleaned up for us.</p>
+      </details>
+
+      <details>
+        <summary>How long does an engagement run?</summary>
+        <p>From a few days to as long as you want. TVApp — a cross-platform media client for tvOS, iPad, macOS and Android — was built and shipped in ten days. A storybook app for a children's charity was twelve weeks. TVPlayer ran ten months, BlackBerry twelve, and leading the mobile division at dnata Travel and Travel Republic ran eighteen months across three extensions. The Vox Cinema apps ran longest of all: two years of continuous support and development on a codebase we inherited.</p>
+        <p>The shape follows the problem rather than a standard package. A diagnosis on a stuck project can be a few days; standing in as technical leadership is ongoing by nature.</p>
+      </details>
+
+      <details>
+        <summary>Is it really just the two of you?</summary>
+        <p>Yes, and that's the point rather than a limitation. We don't sell headcount. The premise of the practice is that two deeply experienced people with modern AI tooling now deliver what used to take a squad — so the people you talk to are the people doing the work, and nothing is passed down to someone more junior once the contract is signed.</p>
+        <p>Where a project genuinely needs more hands, we'll help you source them, and hiring is something we do rather than something we hand off — we've sifted funnels of a thousand applicants and know what a good mid-level engineer looks like on paper and in a room.</p>
+        <p>Leaving a competent team behind is often how an engagement ends. On Travel&nbsp;Republic the client's own account is that the project landed on time and then the foundations were built for the team now running it; at Hotels.com, twelve months in, the ask changed from building the iPad app to organising and managing the entire mobile division. The aim is that you don't need us indefinitely.</p>
+        <p>It does mean we take on a small number of engagements at a time. If we can't do yours properly, we'd rather say so than stretch.</p>
+      </details>
+
+      <details>
+        <summary>Do you cover Android as well as Apple?</summary>
+        <p>Both, in-house, natively. Dominic's depth is on Apple platforms — iOS, iPadOS, tvOS, watchOS and macOS since iOS&nbsp;3 — and Alex is expert on native Android and iOS, including running split codebases across both. TVApp is SwiftUI on Apple and Kotlin on Android, not a cross-platform shortcut.</p>
+      </details>
+
+      <details>
+        <summary>What if the problem isn't a mobile app at all?</summary>
+        <p>Then it's probably still in range. We work on both sides of the wire — microservices, RESTful APIs, event streaming, caching and the data layer — as well as AI systems and LLM integration, robotics, IoT and embedded work, and taking a finished product to market. The capability map above is the honest version of what we're deep in; if your problem sits outside it, we'll tell you rather than learn on your budget.</p>
+      </details>
+
+      <details>
+        <summary>What do you need from us to get started?</summary>
+        <p>A conversation, before anything else — a chance to understand the problem properly, and to find out how you want us to work. Some teams want us in their standups and their repo from day one; others would rather be left alone until there is something to look at. Both are fine, but we would rather ask than assume.</p>
+        <p>What we don't insist on is an upfront specification. If you don't have one, it doesn't matter — we're used to working with ideas and turning them into reality.</p>
+      </details>
+
+      <p class="note" style="margin-top:20px">Anything about rates, contracts, IP or notice is better answered against your actual situation than in the abstract — <a href="contact.html">ask us directly</a>. Looking for help with one of our own apps instead? That's on the <a href="support.html">support page</a>.</p>
+    </section>
+
     <section aria-labelledby="cta-h">
       <div class="section-head">
         <h2 id="cta-h">Want something built?</h2>
@@ -284,6 +362,7 @@
       <div class="panel center">
         <p>Tell us what you're working on — a full project, a prototype, a review, or a problem no one has managed to crack.</p>
         <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
+        <p class="note">Or see <a href="contact.html">what to put in the first email</a>.</p>
       </div>
     </section>
 
@@ -294,10 +373,12 @@
       <div>© <span id="year">2026</span> PowerSlave Developments. All rights reserved.</div>
       <div class="links">
         <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
         <a href="team.html">Team</a>
         <a href="work.html">Client work</a>
         <a href="apps.html">Our apps</a>
         <a href="articles.html">Articles</a>
+        <a href="contact.html">Contact</a>
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
@@ -305,5 +386,50 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    /* The theme button. `data-theme` on <html> is the override; with none stored the
+       palette follows prefers-color-scheme, which is why the effective theme has to
+       be read rather than assumed. The two <meta name="theme-color"> tags are keyed
+       to the system preference, so both are set to the effective colour — whichever
+       one the browser matches then reports the palette actually on screen. */
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) { return; }
+      var root = document.documentElement;
+      var system = window.matchMedia('(prefers-color-scheme: light)');
+      var ink = { dark: '#0b0d12', light: '#fbfbfd' };
+
+      function effective() {
+        var forced = root.getAttribute('data-theme');
+        if (forced === 'light' || forced === 'dark') { return forced; }
+        return system.matches ? 'light' : 'dark';
+      }
+
+      function sync() {
+        var now = effective();
+        var next = now === 'dark' ? 'light' : 'dark';
+        btn.setAttribute('data-next', next);
+        btn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+        btn.setAttribute('title', 'Switch to ' + next + ' theme');
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+          m.setAttribute('content', ink[now]);
+        });
+      }
+
+      btn.hidden = false;
+      sync();
+
+      btn.addEventListener('click', function () {
+        var next = effective() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        sync();
+      });
+
+      /* Keep following the system while no choice has been stored. */
+      system.addEventListener('change', sync);
+    })();
+  </script>
+
 </body>
 </html>
