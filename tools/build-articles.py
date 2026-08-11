@@ -9,7 +9,8 @@ repo root after editing a source file or the template:
     python3 tools/build-articles.py
 
 It writes articles/<slug>.html for every entry in ARTICLES, plus articles.html
-and feed.xml. Nothing else in the repo is touched.
+and feed.xml. It also rewrites the spelled-out article count where index.html and
+404.html state it in prose — see sync_counts. Nothing else in the repo is touched.
 """
 
 import html
@@ -26,6 +27,18 @@ IMG = ROOT / "images" / "articles"
 
 SITE = "https://powerslave.dev"
 AUTHOR = "Dominic Frazer-Imregh"
+
+# Every article is his, so the card at the foot of each one is a constant rather
+# than per-entry data. Condensed from his profile on team.html — if that changes
+# materially, change this with it. Written as plain text with straight quotes, like
+# the article sources: it goes through inline() on the way out.
+AUTHOR_ROLE = "Consultant Engineer & Manager, PowerSlave Developments"
+AUTHOR_BIO = ("Has shipped native Apple software since iOS 3 — Objective-C and "
+              "manual retain/release, then ARC, now SwiftUI. Before that he "
+              "founded and sold a software company, then led international sales "
+              "across the USA and EMEA. Today he is co-founder and CTO of RECRD, "
+              "an AI video platform, and writes here about what AI actually "
+              "changes about senior engineering.")
 
 # Oldest first. `blurb` is the meta description and the index standfirst;
 # `alt` describes the hero image for screen readers.
@@ -135,6 +148,21 @@ MONTHS = {m: i for i, m in enumerate(
     ["January", "February", "March", "April", "May", "June", "July",
      "August", "September", "October", "November", "December"], start=1)}
 
+# The article count is written out in prose, not printed as a digit, so it needs a
+# word. Past twenty, fall back to the numeral rather than spell out compounds.
+NUMBER_WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
+                "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen",
+                "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen",
+                "Nineteen", "Twenty"]
+
+# The pages that state the count in prose, and the phrase that follows it. Nothing
+# computes the number at runtime — it is in <meta> descriptions a crawler reads, so
+# it has to be in the HTML — but nothing hardcodes it either: the count is written
+# here on every build. Keep the phrase identical in these files or the rewrite
+# silently stops matching, which is why the build fails loudly if one misses.
+COUNT_PHRASE = " articles on what AI actually changes"
+COUNT_PAGES = ["index.html", "404.html"]
+
 
 # --- markdown ----------------------------------------------------------------
 
@@ -192,6 +220,33 @@ def body_to_html(body):
             continue
         parts.append(f"        <p>{inline(flat)}</p>")
     return "\n".join(parts)
+
+
+def count_word(n):
+    return NUMBER_WORDS[n] if n < len(NUMBER_WORDS) else str(n)
+
+
+def sync_counts(n):
+    """Rewrite the spelled-out article count on the hand-written pages.
+
+    This is the one place the script reaches outside articles.html, feed.xml and
+    articles/. It exists because the count appears in prose and in <meta>
+    descriptions on index.html and 404.html, where a twelfth article would
+    otherwise leave three stale copies of the word "Eleven" behind.
+    """
+    word = count_word(n)
+    # The word immediately before COUNT_PHRASE, wherever it appears.
+    pattern = re.compile(r"\b\w+(?=" + re.escape(COUNT_PHRASE) + r")")
+    for name in COUNT_PAGES:
+        path = ROOT / name
+        text = path.read_text(encoding="utf-8")
+        new, hits = pattern.subn(word, text)
+        if not hits:
+            sys.exit(f"{name}: no '…{COUNT_PHRASE}' to update — has the wording "
+                     f"changed? Fix the phrase there or COUNT_PHRASE here.")
+        if new != text:
+            path.write_text(new, encoding="utf-8")
+            print(f"wrote {path.relative_to(ROOT)} ({hits}× count → {word})")
 
 
 def parse(slug):
@@ -300,31 +355,109 @@ def index_ld(entries):
 
 # --- templates ---------------------------------------------------------------
 
+def theme_head():
+    """Applies a stored theme choice before the first paint. Must stay identical to
+    the copy in the hand-written pages — see the note on the nav."""
+    return """  <!-- Applies a stored theme choice before the first paint, so choosing the palette
+       that isn't the system default doesn't flash the other one on every navigation.
+       The button that stores it is wired up at the end of the body. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
+"""
+
+
+def theme_script():
+    """The button's wiring, emitted after the copyright-year script in footer()."""
+    return """
+  <script>
+    /* The theme button. `data-theme` on <html> is the override; with none stored the
+       palette follows prefers-color-scheme, which is why the effective theme has to
+       be read rather than assumed. The two <meta name="theme-color"> tags are keyed
+       to the system preference, so both are set to the effective colour — whichever
+       one the browser matches then reports the palette actually on screen. */
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) { return; }
+      var root = document.documentElement;
+      var system = window.matchMedia('(prefers-color-scheme: light)');
+      var ink = { dark: '#0b0d12', light: '#fbfbfd' };
+
+      function effective() {
+        var forced = root.getAttribute('data-theme');
+        if (forced === 'light' || forced === 'dark') { return forced; }
+        return system.matches ? 'light' : 'dark';
+      }
+
+      function sync() {
+        var now = effective();
+        var next = now === 'dark' ? 'light' : 'dark';
+        btn.setAttribute('data-next', next);
+        btn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+        btn.setAttribute('title', 'Switch to ' + next + ' theme');
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+          m.setAttribute('content', ink[now]);
+        });
+      }
+
+      btn.hidden = false;
+      sync();
+
+      btn.addEventListener('click', function () {
+        var next = effective() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        sync();
+      });
+
+      /* Keep following the system while no choice has been stored. */
+      system.addEventListener('change', sync);
+    })();
+  </script>"""
+
+
 def chrome(prefix, current):
     """The shared topbar. `current` is the nav file to mark as the live page."""
     links = [("services.html", "Services"), ("work.html", "Work"),
              ("apps.html", "Apps"), ("team.html", "Team"),
-             ("articles.html", "Articles"), ("support.html", "Support"),
-             ("privacy.html", "Privacy")]
+             ("articles.html", "Articles"), ("contact.html", "Contact"),
+             ("support.html", "Support"), ("privacy.html", "Privacy")]
     nav = "\n".join(
-        f'        <a href="{prefix}{href}"'
+        f'          <a href="{prefix}{href}"'
         f'{" aria-current=\"page\"" if href == current else ""}>{label}</a>'
         for href, label in links)
     return f"""  <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="{prefix}index.html"><img src="{prefix}images/logo-powerslave.svg" alt="PowerSlave Developments" width="1495" height="170"></a>
-      <nav class="topnav" aria-label="Main">
+      <div class="topbar-end">
+        <nav class="topnav" aria-label="Main">
 {nav}
-      </nav>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" hidden>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.3M12 19.1v2.3M4.6 12H2.3M21.7 12h-2.3M6.4 6.4 4.8 4.8M19.2 19.2l-1.6-1.6M17.6 6.4l1.6-1.6M4.8 19.2l1.6-1.6"/></svg>
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8z"/></svg>
+        </button>
+      </div>
     </div>
   </div>"""
 
 
 def footer(prefix):
+    """One footer, the same everywhere. The link set and its order must match the
+    hand-written pages exactly — including the link to the page you are already
+    on — so that there is a single thing to check a new page against."""
     links = [("index.html", "Home"), ("services.html", "Services"),
              ("team.html", "Team"), ("work.html", "Client work"),
              ("apps.html", "Our apps"), ("articles.html", "Articles"),
-             ("support.html", "Support"), ("privacy.html", "Privacy Policy")]
+             ("contact.html", "Contact"), ("support.html", "Support"),
+             ("privacy.html", "Privacy Policy")]
     items = "\n".join(f'        <a href="{prefix}{h}">{l}</a>' for h, l in links)
     return f"""  <footer>
     <div class="wrap">
@@ -335,7 +468,27 @@ def footer(prefix):
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>"""
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+{theme_script()}"""
+
+
+def author_card(prefix):
+    """Who wrote this, at the foot of every article.
+
+    Deliberately outside .article-foot: that block is navigation and print drops
+    it, and the author is content. Initials rather than a photograph, matching the
+    testimonial cards — see the note on .quote .avatar in style.css.
+    """
+    initials = "".join(word[0] for word in AUTHOR.split())[:2].upper()
+    return f"""      <aside class="card author" aria-label="About the author">
+        <span class="author-avatar" aria-hidden="true">{initials}</span>
+        <div class="author-body">
+          <b>{inline(AUTHOR)}</b>
+          <span class="role">{inline(AUTHOR_ROLE)}</span>
+          <p>{inline(AUTHOR_BIO)}</p>
+          <p class="author-links"><a href="{prefix}team.html">Full profile</a><a href="{prefix}contact.html">Work with us</a></p>
+        </div>
+      </aside>"""
 
 
 def article_page(entry, meta, prev_entry, next_entry):
@@ -385,6 +538,7 @@ def article_page(entry, meta, prev_entry, next_entry):
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
+{theme_head()}
   <link rel="stylesheet" href="../style.css">
 
 {article_ld(entry, meta, w, h)}
@@ -414,6 +568,8 @@ def article_page(entry, meta, prev_entry, next_entry):
       <div class="article-body">
 {body_to_html(meta['body'])}
       </div>
+
+{author_card("../")}
 
       <div class="article-foot">{nav_block}        <p><a href="../articles.html">← All articles</a></p>
       </div>
@@ -445,7 +601,7 @@ def index_page(entries):
           </div>
         </article>""")
 
-    blurb = attr("Eleven articles on what AI actually changes about senior "
+    blurb = attr(f"{count_word(len(entries))}{COUNT_PHRASE} about senior "
                  "engineering — the hiring funnel, the unbundling of the "
                  "engineering role, and the habits that stop a team "
                  "accelerating in the wrong direction.")
@@ -473,6 +629,7 @@ def index_page(entries):
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
+{theme_head()}
   <link rel="stylesheet" href="style.css">
 
 {index_ld(entries)}
@@ -488,6 +645,9 @@ def index_page(entries):
       <p class="eyebrow">Articles</p>
       <h1>How we think about the work</h1>
       <p class="lede">{blurb}</p>
+      <!-- The Atom feed has had autodiscovery <link>s since it existed, which no
+           reader can see. This is the only human-visible way in. -->
+      <p class="hero-note">Newest first. New ones land here as they are written — <a href="feed.xml">subscribe by RSS</a>.</p>
     </header>
 
     <section>
@@ -501,7 +661,7 @@ def index_page(entries):
         <h2>Want this thinking applied to your codebase?</h2>
         <p class="lede-sm">We take on senior engineering work — architecture reviews, AI-assisted delivery, and teams that need to ship faster than their headcount suggests.</p>
         <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
-        <p class="note">Or read <a href="services.html">how we engage</a>.</p>
+        <p class="note"><a href="contact.html">What to tell us</a> · <a href="services.html">how we engage</a></p>
       </div>
     </section>
 
@@ -578,6 +738,8 @@ def main():
     feed = ROOT / "feed.xml"
     feed.write_text(feed_xml(entries), encoding="utf-8")
     print(f"wrote {feed.relative_to(ROOT)}")
+
+    sync_counts(len(entries))
 
     # Google drops the Article rich result when the headline runs long. Say so
     # rather than silently truncating someone's title.
