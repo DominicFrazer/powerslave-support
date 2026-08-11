@@ -88,7 +88,7 @@ html {
 body {
   margin: 0;
   /* Three layers, front to back: the glow behind the hero, then a soft full-page
-     fade from the base colour into 10% accent, then the base colour itself as the
+     fade from the base colour into 20% accent, then the base colour itself as the
      floor. Both gradients are mixed from the tokens rather than written as literal
      colours, so the light palette gets the same treatment against its own base —
      a cool tint rather than an inverted dark one. */
@@ -96,7 +96,7 @@ body {
     radial-gradient(1200px 600px at 50% -10%, var(--bg-glow), transparent 60%),
     linear-gradient(180deg,
       var(--bg) 0%,
-      color-mix(in srgb, var(--accent) 10%, var(--bg)) 100%),
+      color-mix(in srgb, var(--accent) 20%, var(--bg)) 100%),
     var(--bg);
   background-repeat: no-repeat;
   /* The linear layer is sized to the body box, so a page shorter than the viewport
