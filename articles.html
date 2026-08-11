@@ -21,6 +21,20 @@
   <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
+  <!-- Applies a stored theme choice before the first paint, so choosing the palette
+       that isn't the system default doesn't flash the other one on every navigation.
+       The button that stores it is wired up at the end of the body. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -127,15 +141,22 @@
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html"><img src="images/logo-powerslave.svg" alt="PowerSlave Developments" width="1495" height="170"></a>
-      <nav class="topnav" aria-label="Main">
-        <a href="services.html">Services</a>
-        <a href="work.html">Work</a>
-        <a href="apps.html">Apps</a>
-        <a href="team.html">Team</a>
-        <a href="articles.html" aria-current="page">Articles</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
-      </nav>
+      <div class="topbar-end">
+        <nav class="topnav" aria-label="Main">
+          <a href="services.html">Services</a>
+          <a href="work.html">Work</a>
+          <a href="apps.html">Apps</a>
+          <a href="team.html">Team</a>
+          <a href="articles.html" aria-current="page">Articles</a>
+          <a href="contact.html">Contact</a>
+          <a href="support.html">Support</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" hidden>
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.3M12 19.1v2.3M4.6 12H2.3M21.7 12h-2.3M6.4 6.4 4.8 4.8M19.2 19.2l-1.6-1.6M17.6 6.4l1.6-1.6M4.8 19.2l1.6-1.6"/></svg>
+          <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -145,6 +166,9 @@
       <p class="eyebrow">Articles</p>
       <h1>How we think about the work</h1>
       <p class="lede">Eleven articles on what AI actually changes about senior engineering — the hiring funnel, the unbundling of the engineering role, and the habits that stop a team accelerating in the wrong direction.</p>
+      <!-- The Atom feed has had autodiscovery <link>s since it existed, which no
+           reader can see. This is the only human-visible way in. -->
+      <p class="hero-note">Newest first. New ones land here as they are written — <a href="feed.xml">subscribe by RSS</a>.</p>
     </header>
 
     <section>
@@ -289,7 +313,7 @@
         <h2>Want this thinking applied to your codebase?</h2>
         <p class="lede-sm">We take on senior engineering work — architecture reviews, AI-assisted delivery, and teams that need to ship faster than their headcount suggests.</p>
         <a class="email" href="mailto:support@powerslave.dev">support@powerslave.dev</a>
-        <p class="note">Or read <a href="services.html">how we engage</a>.</p>
+        <p class="note"><a href="contact.html">What to tell us</a> · <a href="services.html">how we engage</a></p>
       </div>
     </section>
 
@@ -305,6 +329,7 @@
         <a href="work.html">Client work</a>
         <a href="apps.html">Our apps</a>
         <a href="articles.html">Articles</a>
+        <a href="contact.html">Contact</a>
         <a href="support.html">Support</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
@@ -312,5 +337,50 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    /* The theme button. `data-theme` on <html> is the override; with none stored the
+       palette follows prefers-color-scheme, which is why the effective theme has to
+       be read rather than assumed. The two <meta name="theme-color"> tags are keyed
+       to the system preference, so both are set to the effective colour — whichever
+       one the browser matches then reports the palette actually on screen. */
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) { return; }
+      var root = document.documentElement;
+      var system = window.matchMedia('(prefers-color-scheme: light)');
+      var ink = { dark: '#0b0d12', light: '#fbfbfd' };
+
+      function effective() {
+        var forced = root.getAttribute('data-theme');
+        if (forced === 'light' || forced === 'dark') { return forced; }
+        return system.matches ? 'light' : 'dark';
+      }
+
+      function sync() {
+        var now = effective();
+        var next = now === 'dark' ? 'light' : 'dark';
+        btn.setAttribute('data-next', next);
+        btn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+        btn.setAttribute('title', 'Switch to ' + next + ' theme');
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+          m.setAttribute('content', ink[now]);
+        });
+      }
+
+      btn.hidden = false;
+      sync();
+
+      btn.addEventListener('click', function () {
+        var next = effective() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        sync();
+      });
+
+      /* Keep following the system while no choice has been stored. */
+      system.addEventListener('change', sync);
+    })();
+  </script>
 </body>
 </html>
