@@ -1,9 +1,9 @@
 # PowerSlave Developments — powerslave.dev
 
 Static site for PowerSlave Developments, a senior engineering consultancy that also publishes its own
-apps. Plain HTML/CSS, nothing to build at deploy time, no JavaScript beyond a copyright year, a computed
-year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
-[powerslave.dev](https://powerslave.dev).
+apps. Plain HTML/CSS, nothing to build at deploy time, and no JavaScript beyond a copyright year, a
+computed year count, one legacy-anchor redirect and the theme override button. Hosted free on GitHub
+Pages at [powerslave.dev](https://powerslave.dev).
 
 ## Files
 
@@ -17,6 +17,7 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 | `articles.html` | Articles — index of the eleven articles, newest first |
 | `articles/*.html` | One page per article. **Generated — don't hand-edit.** See *Adding an article* |
 | `articles/src/*.md` | The articles as written, in markdown. These are the source of truth for the text |
+| `contact.html` | Contact — what to put in the first email, who reads it, and faster routes for app and privacy questions |
 | `support.html` | Support — Android beta instructions, FAQ, contact |
 | `privacy.html` | Privacy policy (TVApp and other apps) — required by the App Store |
 | `privacy-wanderer.html` | Privacy policy for Map Wanderer (it uses third-party map/routing services, so it needs its own) |
@@ -35,15 +36,44 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 
 ## Conventions
 
-- **Design tokens** live in `:root` at the top of `style.css`. Dark is the default; the light palette is a
-  `prefers-color-scheme: light` override. Change colours there, not in component rules.
+- **Design tokens** live in `:root` at the top of `style.css`. Dark is the default; light applies when the
+  system asks for it or the reader picks it. Change colours there, not in component rules.
+- **The theme override.** A button in the topbar switches dark/light and stores the choice in
+  `localStorage`, so it survives navigation. Three pieces make it work, and each is defined twice — once
+  in the ten hand-written pages and once in `tools/build-articles.py` (`theme_head()`, the button inside
+  `chrome()`, and `theme_script()` appended by `footer()`). **Change one and change the other.**
+
+  The palette arbitration is worth reading before touching it. `:root` is dark;
+  `@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) }` is the automatic light case;
+  `:root[data-theme="light"]` is the explicit one. Both light selectors are (0,2,0) so the explicit choice
+  wins on document order, and plain `:root` is (0,1,0) and loses to either — which covers all four
+  combinations of system preference and stored choice. **The light palette is therefore written twice, and
+  both copies have to change together**; dark needs no second copy because the `:not()` steps aside for it.
+
+  The button ships with the `hidden` attribute and script removes it, so a reader with JavaScript off is
+  never shown a control that cannot work — the OS preference still drives the palette on its own. The
+  script also rewrites both `<meta name="theme-color">` tags to the effective colour, because those are
+  keyed to the *system* preference and would otherwise leave a phone's address bar showing the palette the
+  reader just switched away from.
+- **The nav is full.** Eight links plus the theme button come to 832px against 860px of content width, so
+  `.topnav` was tightened to 3px gaps and 10px padding to keep it on one row. A ninth link will push the
+  whole group onto a second line — tighten further, or drop something (`Privacy` is the obvious candidate,
+  since it is in the footer on every page).
 - **The topbar brand is the wordmark alone**, with no text beside it. The artwork reads "POWERSLAVE", so
   the link's accessible name comes entirely from `alt="PowerSlave Developments"` — that alt is the only
   place the full company name appears in the header, so don't shorten it. The old gradient `.dot` is gone.
 - **Every page** shares the same `.topbar` markup and marks its own nav link with `aria-current="page"`.
-  The nav is defined twice: literally in the nine hand-written pages, and in `chrome()` in
+  The nav is defined twice: literally in the ten hand-written pages, and in `chrome()` in
   `tools/build-articles.py` for the generated article pages (which need `../` on every path). **Change one
   and you must change the other**, or the article pages will drift out of step with the rest of the site.
+- **One footer, identical on every page** — the same nine links in the same order, including a link to the
+  page you are already on. Pages used to drop their own link from the set, which meant nine subtly
+  different footers, one of which (`work.html`) had quietly lost three links with nothing to catch it.
+  Uniformity is the point: there is now a single block to check a new page against. It is defined in the
+  same two places as the nav — literally in the hand-written pages, and in `footer()` in
+  `tools/build-articles.py`. `404.html` carries the same set with root-absolute paths, for the reason
+  below. The Map Wanderer policy is deliberately *not* in it — it is one app's policy, and it is linked
+  from `privacy.html` twice, `support.html` twice and `apps.html`.
 - **Social previews.** Every page carries `og:image` and `twitter:card=summary_large_image`. The nine
   hand-written pages share `images/og-default.png`; each article points at its own hero instead. The card
   is rendered from `tools/og-image.html`, which duplicates the palette rather than linking `style.css` —
@@ -95,6 +125,13 @@ year count, and one legacy-anchor redirect. Hosted free on GitHub Pages at
 - **The specialities count is written out in three places** — the `<span class="note">` in the section
   header on `services.html`, the page lede, and its `og:description`. Add or remove a card and all three
   need changing; nothing computes it.
+- **The article count is not one of those traps.** It appears in prose on `index.html` and `404.html` and
+  three times on `articles.html`, and `sync_counts()` in `tools/build-articles.py` rewrites every copy on
+  each run. It can't be computed in the browser, because two of the copies are `<meta>` descriptions a
+  crawler reads — so it is written at build time instead. The rewrite anchors on the phrase
+  `" articles on what AI actually changes"`, held in `COUNT_PHRASE`: **keep that wording intact in both
+  hand-written pages**, or change it in both places and in the script. The build exits with an error if a
+  page stops matching, rather than leaving a stale number behind.
 
 ## Adding an app
 
@@ -145,6 +182,11 @@ Things the generator handles, so you don't have to:
 - **Social previews.** Each article gets `og:type=article`, `og:image` pointing at its hero, and real
   image dimensions read off the file with `sips`.
 - **Prev/next links**, ordered by position in `ARTICLES`, oldest first.
+- **The author card** at the foot of every article, from `AUTHOR`, `AUTHOR_ROLE` and `AUTHOR_BIO`. Every
+  article is Dominic's, so it is a constant rather than per-entry data — give `ARTICLES` an author field if
+  that ever stops being true. It sits *outside* `.article-foot` on purpose: that block is navigation and
+  `@media print` drops it, whereas who wrote the piece is content and should survive to paper.
+- **The spelled-out article count**, everywhere it appears — see the conventions above.
 - **Structured data** — `Article` per page, `CollectionPage` on the index.
 - **The Atom feed** at `feed.xml`, newest first, with autodiscovery `<link>`s on the article pages,
   `articles.html` and the home page.
@@ -177,6 +219,20 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
 10:22 PM. It ticks over to 16 on 17 September 2026 with no edit needed.
 
 ## Known follow-ups
+
+- **`contact.html` and the `services.html` FAQ deliberately answer nothing commercial.** No response-time
+  commitment, no day rate, no minimum engagement, no IP-ownership position, and no stated availability.
+  NDAs are the one exception — the contact page says we'll sign one either way, which needs no published
+  document. Every other answer on those two surfaces is derivable from the record on `work.html` and
+  `team.html`; those four are not, and inventing them would put claims about the business on the site that
+  the business hasn't made. The FAQ closes by saying they're better answered against a real situation and
+  routing to email — which is defensible, but it is a stopgap. Supply the facts and they become the most
+  valuable answers on the page, because they are the ones every buyer actually wants.
+- **No LinkedIn links anywhere on the site.** The eight testimonials on `work.html` are quoted from
+  LinkedIn recommendations and say so, and all eleven articles were published there first — but nothing
+  links to either principal's profile, and the `Organization` block in `index.html` has no `sameAs`. That
+  costs twice: a reader can't verify the quotes, and search engines have no edge joining this site to two
+  established profiles. Adding the two profile URLs fixes both.
 
 - **Two dates in the source CV are impossible** and were reduced to years on `work.html` rather than
   guessed at: Zalando reads "Oct 2020 – Mar 2020" (published as 2019–2020), and Tignum reads
