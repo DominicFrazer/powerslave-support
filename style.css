@@ -407,6 +407,83 @@ h2 {
   color: var(--accent-2);
 }
 
+/* Capability map ------------------------------------------------- */
+
+/* A diagram made of markup rather than an image, so the text stays real and the
+   whole thing follows the design tokens into light mode. Tiers are distinguished
+   by their labels, not by colour, which keeps it from competing with the cards
+   directly beneath it. */
+.stack-map {
+  margin: 0 0 28px;
+  padding: 26px 24px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.map-label {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.map-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.map-row-one { grid-template-columns: minmax(0, 1fr); }
+
+.map-row li {
+  margin: 0;
+  padding: 13px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* The outcome tier is the one thing that earns emphasis — it is what the other
+   six feed into. */
+.map-row li.map-outcome {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: var(--accent-ink);
+}
+
+.map-join {
+  margin: 0;
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.map-join span {
+  display: block;
+  font-size: 17px;
+  line-height: 1.1;
+  color: var(--border-strong);
+}
+
+.map-foot {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 620px) {
+  .map-row { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* Services ------------------------------------------------------- */
 
 .services {
