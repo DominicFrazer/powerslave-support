@@ -8,3 +8,8 @@
 # produce any, but it will the moment anything in tools/ gets imported.
 __pycache__/
 *.py[cod]
+
+# Claude Code's per-machine tool permissions. Only the local overrides are ignored:
+# .claude/settings.json is the shareable half and should be committed if one ever
+# exists, which is why this isn't a blanket .claude/ rule.
+.claude/settings.local.json
