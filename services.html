@@ -106,34 +106,67 @@
            the arrow glyphs are aria-hidden. -->
       <div class="stack-map">
 
-        <div class="map-tier">
-          <p class="map-label">Three capabilities we build with</p>
-          <ul class="map-row">
-            <li>Native Mobile</li>
-            <li>Back End &amp; Platform</li>
-            <li>AI Systems</li>
-          </ul>
+        <svg class="map-sprite" aria-hidden="true" focusable="false">
+          <symbol id="i-mobile" viewBox="0 0 24 24">
+            <rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.2h2.8"/>
+          </symbol>
+          <symbol id="i-server" viewBox="0 0 24 24">
+            <ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v6c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8V6"/>
+            <path d="M5 12v6c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8v-6"/>
+          </symbol>
+          <symbol id="i-ai" viewBox="0 0 24 24">
+            <circle cx="12" cy="6" r="2.3"/><circle cx="5.8" cy="16.5" r="2.3"/><circle cx="18.2" cy="16.5" r="2.3"/>
+            <path d="M10.4 7.7 7.4 14.4M13.6 7.7l3 6.7M8.1 16.5h7.8"/>
+          </symbol>
+          <symbol id="i-fin" viewBox="0 0 24 24">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="2.2"/><path d="M2.5 10h19M6 14.5h4"/>
+          </symbol>
+          <symbol id="i-media" viewBox="0 0 24 24">
+            <rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M10.2 9.3l4.6 2.7-4.6 2.7z"/>
+          </symbol>
+          <symbol id="i-iot" viewBox="0 0 24 24">
+            <rect x="7.5" y="7.5" width="9" height="9" rx="1.6"/>
+            <path d="M10 4v3.5M14 4v3.5M10 16.5V20M14 16.5V20M4 10h3.5M4 14h3.5M16.5 10H20M16.5 14H20"/>
+          </symbol>
+          <symbol id="i-market" viewBox="0 0 24 24">
+            <path d="M4 19 11 12l3.2 3.2L20 8.6"/><path d="M15.2 8.2H20v4.8"/>
+          </symbol>
+        </svg>
+
+        <p class="map-label">Three capabilities we build with</p>
+        <ul class="map-row tier-cap">
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-mobile"/></svg></span>Native Mobile</li>
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></span>Back End &amp; Platform</li>
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-ai"/></svg></span>AI Systems</li>
+        </ul>
+
+        <div class="map-flow">
+          <svg class="map-lines" viewBox="0 0 300 44" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M50 0V44M150 0V44M250 0V44"/>
+            <path d="M50 6C50 24 150 20 150 38M250 6C250 24 150 20 150 38"/>
+          </svg>
+          <p class="map-join">combine inside</p>
         </div>
 
-        <p class="map-join"><span aria-hidden="true">↓</span> combine inside</p>
+        <p class="map-label">Three domains we know deeply</p>
+        <ul class="map-row tier-dom">
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-fin"/></svg></span>FinTech &amp; Regulated</li>
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-media"/></svg></span>Media &amp; Video</li>
+          <li><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-iot"/></svg></span>Robotics &amp; IoT</li>
+        </ul>
 
-        <div class="map-tier">
-          <p class="map-label">Three domains we know deeply</p>
-          <ul class="map-row">
-            <li>FinTech &amp; Regulated</li>
-            <li>Media &amp; Video</li>
-            <li>Robotics &amp; IoT</li>
-          </ul>
+        <div class="map-flow">
+          <svg class="map-lines funnel" viewBox="0 0 300 44" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M50 0C50 26 150 14 150 44M150 0V44M250 0C250 26 150 14 150 44"/>
+          </svg>
+          <p class="map-join">and reach a market through</p>
         </div>
 
-        <p class="map-join"><span aria-hidden="true">↓</span> and reach a market through</p>
+        <ul class="map-row map-row-one">
+          <li class="map-outcome"><span class="map-ico"><svg viewBox="0 0 24 24"><use href="#i-market"/></svg></span>Product Commercialisation</li>
+        </ul>
 
-        <div class="map-tier">
-          <ul class="map-row map-row-one">
-            <li class="map-outcome">Product Commercialisation</li>
-          </ul>
-          <p class="map-foot">Which is why a mobile engagement here doesn't stop at the client.</p>
-        </div>
+        <p class="map-foot">Which is why a mobile engagement here doesn't stop at the client.</p>
 
       </div>
 
