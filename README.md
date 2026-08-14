@@ -9,8 +9,8 @@ Pages at [powerslave.dev](https://powerslave.dev).
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home — consultancy pitch, the ten-day proof block, engagement modes, audiences, both principals, clients, apps teaser, articles teaser, contact |
-| `services.html` | Services — four ways to engage us, seven specialities, audiences, philosophy |
+| `index.html` | Home — consultancy pitch, the ten-day proof block, the commercial commitments, engagement modes, audiences, both principals, clients, apps teaser, articles teaser, contact |
+| `services.html` | Services — four ways to engage us, the commercial commitments, seven specialities, audiences, philosophy |
 | `team.html` | Team — full profiles for both principals, and why two people |
 | `apps.html` | Our apps — featured app plus the catalogue, with language labels |
 | `work.html` | Client work — engagements by sector, from the Oct 2023 CV and the company profile |
@@ -125,6 +125,20 @@ Pages at [powerslave.dev](https://powerslave.dev).
 - **The specialities count is written out in three places** — the `<span class="note">` in the section
   header on `services.html`, the page lede, and its `og:description`. Add or remove a card and all three
   need changing; nothing computes it.
+- **The commercial commitments are stated twice**, and they are the only claims on the site about how the
+  business trades rather than about what it has built: three cards in `#commitments` on `services.html`,
+  and the same three said shorter in `#commitments` on `index.html`, which links to the long form.
+  **Change one and change the other.** The three are a weekly demo, senior-only staffing, and full
+  ownership of the code and IP from day one. Ownership is stated as *unconditional* — nothing elsewhere may
+  imply it turns on final payment.
+
+  **None of it commits to a price or a pricing model, and that is the decision, not an omission.** A
+  fixed-scope, fixed-price card was written and dropped: it can't hold across the four engagement modes
+  above it, since fractional leadership and a rescue with an unknown cause are open-ended by nature, and
+  the FAQ two sections down says we don't insist on an upfront specification. Anything about money belongs
+  in the conversation the FAQ note routes to. The `services.html` FAQ closes by pointing at the section for
+  ownership and staffing only; `services.html`'s `meta description` and `og:description` carry the demo,
+  senior-only and IP claims for the search snippet, and no money.
 - **The article count is not one of those traps.** It appears in prose on `index.html` and `404.html` and
   three times on `articles.html`, and `sync_counts()` in `tools/build-articles.py` rewrites every copy on
   each run. It can't be computed in the browser, because two of the copies are `<meta>` descriptions a
@@ -220,14 +234,17 @@ That date is TreeWise v1.0's "Ready for Sale" timestamp from App Store Connect �
 
 ## Known follow-ups
 
-- **`contact.html` and the `services.html` FAQ deliberately answer nothing commercial.** No response-time
-  commitment, no day rate, no minimum engagement, no IP-ownership position, and no stated availability.
-  NDAs are the one exception — the contact page says we'll sign one either way, which needs no published
-  document. Every other answer on those two surfaces is derivable from the record on `work.html` and
-  `team.html`; those four are not, and inventing them would put claims about the business on the site that
-  the business hasn't made. The FAQ closes by saying they're better answered against a real situation and
-  routing to email — which is defensible, but it is a stopgap. Supply the facts and they become the most
-  valuable answers on the page, because they are the ones every buyer actually wants.
+- **Three of the commercial answers are now published; the rest are still missing.** The site used to
+  answer nothing commercial at all, on the grounds that inventing those claims would put statements about
+  the business on the site that the business hadn't made. Three have since been supplied and are published
+  in `#commitments` — the weekly demo, senior-only staffing, and full ownership of the code and IP from day
+  one — plus NDAs, which the contact page has always covered.
+
+  Still unanswered: **nothing about money** (no day rate, no fixed-price offer, no pricing model, no
+  minimum engagement), **no response-time commitment and no stated availability.** Money is deliberate and
+  settled — see the conventions above. The other two are still open, and availability is the weakest of
+  them, because a buyer reads silence there as "probably busy". Supply either and it slots straight into
+  the same section.
 - **No LinkedIn links anywhere on the site.** The eight testimonials on `work.html` are quoted from
   LinkedIn recommendations and say so, and all eleven articles were published there first — but nothing
   links to either principal's profile, and the `Organization` block in `index.html` has no `sameAs`. That
