@@ -18,7 +18,7 @@ Pages at [powerslave.dev](https://powerslave.dev).
 | `articles/*.html` | One page per article. **Generated — don't hand-edit.** See *Adding an article* |
 | `articles/src/*.md` | The articles as written, in markdown. These are the source of truth for the text |
 | `contact.html` | Contact — what to put in the first email, who reads it, and faster routes for app and privacy questions |
-| `support.html` | Support — Android beta instructions, FAQ, contact |
+| `support.html` | Support — FAQ, TVApp for Android, contact |
 | `privacy.html` | Privacy policy (TVApp and other apps) — required by the App Store |
 | `privacy-wanderer.html` | Privacy policy for Map Wanderer (it uses third-party map/routing services, so it needs its own) |
 | `style.css` | Shared styling — design tokens, dark and light themes |
